@@ -1,4 +1,7 @@
 <?php
+	# Global variables
+	# Set host to ip/hostname hosting database
+	# username/pass etc...
 	$footer='Copyright &copy; 2011 Vicious';
 	$heading='XBMC Database Manager';
 	$host = "localhost";

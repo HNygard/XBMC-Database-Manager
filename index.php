@@ -9,13 +9,6 @@
 		<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
 		<title>XBMC Database Manager</title>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
-		<!--<script>
-			var auto_refresh = setInterval(
-				function()
-				{
-					$('#content').fadeOut('slow').load('content.php').fadeIn("slow");
-				}, 20000);
-		</script>-->
 		<script type="text/javascript">
 			$('#choose').change(function(event) {
 				$('#update').html('This is ' + $('#choose').val() + ' and other info');
@@ -24,6 +17,7 @@
 	</head>
 	<body>
 		<div id="wrapper">
+			<!-- Include PHP files -->
 			<?php
 				include('includes/header.php');
 				include('includes/functions.php');
