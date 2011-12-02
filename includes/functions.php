@@ -24,67 +24,66 @@
 			return $result;
 		}
 		
-		function dbobject($query)
-		{
-			global $dbconn;
-			$result=$dbconn->queryScalar($query);
-			#$sth->execute();
-			#$result = $dbconn->query($query);
-			return $result;
-		}
-		
 		function getPath($id)
 		{
 			switch ($_GET["view"])
 			{
 				case "movies":
-					echo "MOVIES";
+					$q = "SELECT idFile FROM movie WHERE idMovie = " . $id;
+					foreach (dbquery($q) as $temp)
+					{
+						$idfile = $temp['idFile'];
+					}
+					$q = "SELECT idPath,strFilename FROM files WHERE idFile = " . $idfile;
+					foreach (dbquery($q) as $temp)
+					{
+						$filename = $temp['strFilename'];
+						$idpath = $temp['idPath'];
+					}
 					break;
 				case "shows":
 					$q = "SELECT idPath FROM tvshowlinkpath WHERE idShow = " . $id;
-					echo "\"" . $q . "\"";
-					$pathquery = dbobject($q);
-					#foreach (dbquery($q) as $temp)
-					#{
-					#	$idpath = $temp['idPath'];
-					#	echo $idpath;
-					#}
-					#while ($pq->fetch (PDO::FETCH_NUM))
-					#	$idpath = $pq;
-					
+					foreach (dbquery($q) as $temp)
+					{
+						$idpath = $temp['idPath'];
+					}
 					break;
 			}
-			echo "TEST" . $idpath;
-			#$q = "SELECT strPath FROM path WHERE idPath = " . $idpath;
-			#$temp = dbquery($q);
-			#echo "TEST";
-			#while ($temp->fetch (PDO::FETCH_NUM))
-		#		$strpath = $temp;
-		#	echo "TEST";
-			return $strpath[0];
+			$q = "SELECT strPath FROM path WHERE idPath = ". $idpath;
+			foreach (dbquery($q) as $temp)
+			{
+				$strpath = $temp['strPath'];
+			}
+			return $strpath;
 		}
 		
-/*		function getFile($id)
+		function MovieFile($id)
 		{
 			$q = "SELECT idFile FROM movie WHERE idMovie = " . $id;
 			foreach (dbquery($q) as $temp)
 			{
 					$idfile = $temp['idFile'];
 			}
-			$q = "SELECT idPath,strFilename FROM files WHERE idFile = " . $idfile;
+			$q = "SELECT strFilename FROM files WHERE idFile = " . $idfile;
 			foreach (dbquery($q) as $temp)
 			{
 					$filename = $temp['strFilename'];
-					$idpath = $temp['idPath'];
 			}
-			$q = "SELECT strPath FROM path WHERE idPath = ". $idpath;
-			foreach (dbquery($q) as $temp)
-			{
-					$path = $temp['strPath'];
-			}
-			return $path.$filename;
-		}*/
+			return $filename;
+		}
 		
+		function numEpisodes($id)
+		{
+			global $dbconn;
+			$numtest = $dbconn->prepare("SELECT idEpisode FROM tvshowlinkepisode WHERE idShow = " . $id);
+			$numtest->execute();
+			$count = $numtest->rowCount();
+			#foreach (dbquery($q) as $temp)
+			#{
+			#		$filename = $temp['strFilename'];
+			#}
+			return $count;
+		}
 		
 		function PrintInfo($id)
 		{
@@ -96,17 +95,19 @@
 					$temp = dbquery($q);
 					while ($row = $temp->fetch (PDO::FETCH_NUM))
 						$col2 = $row;										#Sets last row from query
-						$col2[7] = number_format($col2[7],1);				#Format rating to 1 decimal
+					$col2[7] = number_format($col2[7],1);					#Format rating to 1 decimal
+					$col2[10] = getPath($id) . MovieFile($id);
 					break;
 					
 				case "shows":
-					$q = "SELECT c00,c05,c08,c04,c14,idShow,c01 FROM tvshow WHERE idShow = " . $id;
+					$q = "SELECT c00,c02,c05,c08,c04,c14,idShow,c01 FROM tvshow WHERE idShow = " . $id;
 					$col1 = array("Episodes","First Aired", "Genre", "Rating", "Network", "Path", "Plot");
 					$temp = dbquery($q);
 					while ($row = $temp->fetch (PDO::FETCH_NUM))
 						$col2 = $row;										#Sets last row from query
-					$col2[3] = number_format($col2[3],1);					#Format rating to 1 decimal
-					$col2[5] = getPath($id);
+					$col2[1] = numEpisodes($id);
+					$col2[4] = number_format($col2[4],1);					#Format rating to 1 decimal
+					$col2[6] = getPath($id);
 					break;
 			}
 			?>
