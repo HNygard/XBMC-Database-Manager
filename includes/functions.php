@@ -114,7 +114,7 @@
 			<table border="0">
 				<tr>
 					<td>
-						<?php echo "<h1>" . $title . "</h1>"; ?>
+						<?php echo "<h1>" . $col2[0] . "</h1>"; ?>
 					</td>
 				</tr>
 			</table>
