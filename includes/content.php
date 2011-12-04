@@ -3,12 +3,12 @@
 	$id = $_GET["id"];
     if ($_POST['Watched'])
     {
-		markAsWatched($id);
+		markWatched($id);
     }
-
+	
 	if ($_GET["action"] == "getmovie" || $_GET["action"] == "getshow")
 	{
-		PrintInfo($id);
+		PrintContent($id);
 	}
 	else
 	{

@@ -1,4 +1,50 @@
 <?php
+		function init()
+		{
+			global $tvshowtable;
+			dbopen();
+			$q = "SELECT idVersion FROM version";
+			foreach (dbquery($q) as $temp)
+			{
+				$version = $temp['idVersion'];
+			}
+			switch ($version)
+			{
+				case 42:
+					$tvshowtable = "tvshow";
+					break;
+				case 57:
+					$tvshowtable = "tvshowview";
+					break;
+			}
+		}
+		
+		function drawOptions($watched)
+		{
+			?>
+            <div id="options">
+				<form action="" method="post">
+					<?php
+					switch ($watched)
+					{
+						case "Yes":
+							?>
+							<button type="submit">Mark as Not Watched</Button>
+							<input type="hidden" name="Watched" value="2">
+							<?php
+							break;
+						case "No":
+							?>
+							<button type="submit">Mark as Watched</Button>
+							<input type="hidden" name="Watched" value="1">
+							<?php
+							break;
+					}?>
+				</form>
+			</div>
+			<?php
+		}
+		
 		function dbopen()
 		{
 			global $dbconn, $hostname, $database, $username, $password;
@@ -81,23 +127,31 @@
 			return $count;
 		}
 
-		function markAsWatched($id)
+		function markWatched($id)
         {
-          if($_GET["view"] == "shows" )
-          {
-            echo "Marking TV shows as watched is not yet supported";
-            return;
-          }
+			if($_GET["view"] == "shows" )
+			{
+				echo "<script type='text/javascript'>alert(\"NOT SUPPORTED YET!\")</script>";
+				return;
+			}
           
-          $table = ($_GET["view"] == "shows" ) ? "tvshowview" : "movieview";
-          $idType = ($_GET["view"] == "shows" ) ? "idShow" : "idMovie"; 
-          $q = "UPDATE $table SET playCount=1 WHERE $idType = $id AND playCount IS NULL";
-          dbquery($q);
-          echo "Marked as watched";          
+			$table = ($_GET["view"] == "shows" ) ? $tvshowtable : "movieview";
+			$idType = ($_GET["view"] == "shows" ) ? "idShow" : "idMovie"; 
+			switch ($_POST["Watched"])
+			{
+				case 1:
+					$q = "UPDATE $table SET playCount = 1 WHERE $idType = $id AND playCount IS NULL";
+					break;
+				case 2:
+					$q = "UPDATE $table SET playCount = NULL WHERE $idType = $id AND playCount = 1";
+					break;
+			}
+			dbquery($q);
         }
 		
-		function PrintInfo($id)
+		function PrintContent($id)
 		{
+			global $tvshowtable;
 			switch ($_GET["view"])
 			{
 				case "movies":
@@ -112,7 +166,7 @@
 					break;
 					
 				case "shows":
-					$q = "SELECT c00,c02,c05,c08,c04,c14,idShow,c01 FROM tvshow WHERE idShow = " . $id;
+					$q = "SELECT c00,c02,c05,c08,c04,c14,idShow,c01 FROM " . $tvshowtable . " WHERE idShow = " . $id;
 					$col1 = array("Episodes","First Aired", "Genre", "Rating", "Network", "Path", "Plot");
 					$temp = dbquery($q);
 					while ($row = $temp->fetch (PDO::FETCH_NUM))
@@ -122,6 +176,7 @@
 					$col2[6] = getPath($id);
 					break;
 			}
+			drawOptions($col2[13]);
 			?>
 			<table border="0">
 				<tr>
@@ -140,10 +195,6 @@
 					}
 				?>
               </table>
-              <form action="" method="post">
-                  <button type="submit">Mark as Watched</Button>
-                  <input type="hidden" name="Watched" value="1">
-              </form>
 			<?php
 		}
 ?>

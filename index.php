@@ -21,7 +21,7 @@
 			<?php
 				include('includes/header.php');
 				include('includes/functions.php');
-				dbopen();
+				init();								#Calls init function, also opens db connection
 				include('includes/nav.php');
 				include('includes/sidebar.php');
 				include('includes/content.php');
