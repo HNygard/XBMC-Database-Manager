@@ -1,6 +1,11 @@
 <div id="content">
 <?php
 	$id = $_GET["id"];
+    if ($_POST['Watched'])
+    {
+      markAsWatched($id);
+    }
+
 	if ($_GET["action"] == "getmovie" || $_GET["action"] == "getshow")
 	{
 		PrintInfo($id);
