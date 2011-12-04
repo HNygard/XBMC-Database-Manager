@@ -78,10 +78,6 @@
 			$numtest = $dbconn->prepare("SELECT idEpisode FROM tvshowlinkepisode WHERE idShow = " . $id);
 			$numtest->execute();
 			$count = $numtest->rowCount();
-			#foreach (dbquery($q) as $temp)
-			#{
-			#		$filename = $temp['strFilename'];
-			#}
 			return $count;
 		}
 
@@ -116,7 +112,7 @@
 					break;
 					
 				case "shows":
-					$q = "SELECT c00,c02,c05,c08,c04,c14,idShow,c01 FROM tvshowview WHERE idShow = " . $id;
+					$q = "SELECT c00,c02,c05,c08,c04,c14,idShow,c01 FROM tvshow WHERE idShow = " . $id;
 					$col1 = array("Episodes","First Aired", "Genre", "Rating", "Network", "Path", "Plot");
 					$temp = dbquery($q);
 					while ($row = $temp->fetch (PDO::FETCH_NUM))
