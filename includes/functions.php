@@ -20,7 +20,7 @@
 		function dbquery($query)
 		{
 			global $dbconn;
-			$result = $dbconn->query($query);
+            $result = $dbconn->query($query);
 			return $result;
 		}
 		
@@ -84,23 +84,39 @@
 			#}
 			return $count;
 		}
+
+		function markAsWatched($id)
+        {
+          if($_GET["view"] == "shows" )
+          {
+            echo "Marking TV shows as watched is not yet supported";
+            return;
+          }
+          
+          $table = ($_GET["view"] == "shows" ) ? "tvshowview" : "movieview";
+          $idType = ($_GET["view"] == "shows" ) ? "idShow" : "idMovie"; 
+          $q = "UPDATE $table SET playCount=1 WHERE $idType = $id AND playCount IS NULL";
+          dbquery($q);
+          echo "Marked as watched";          
+        }
 		
 		function PrintInfo($id)
 		{
 			switch ($_GET["view"])
 			{
 				case "movies":
-					$q = "SELECT c00,c15,c06,c18,c14,c07,c11,c05,c03,c02,idFile,c09,c01 FROM movie WHERE idMovie = " . $id;
-					$col1 = array("Director","Writer", "Studio", "Genre", "Year", "Runtime", "Rating", "Tagline", "Plot Outline", "File", "External Info", "Plot");
+					$q = "SELECT c00,c15,c06,c18,c14,c07,c11,c05,c03,c02,idFile,c09,c01,playCount FROM movieview WHERE idMovie = " . $id;
+					$col1 = array("Director","Writer", "Studio", "Genre", "Year", "Runtime", "Rating", "Tagline", "Plot Outline", "File", "External Info", "Plot", "Watched");
 					$temp = dbquery($q);
 					while ($row = $temp->fetch (PDO::FETCH_NUM))
 						$col2 = $row;										#Sets last row from query
 					$col2[7] = number_format($col2[7],1);					#Format rating to 1 decimal
 					$col2[10] = getPath($id) . MovieFile($id);
+                    $col2[13] = $col2[13] ? "Yes" : "No";
 					break;
 					
 				case "shows":
-					$q = "SELECT c00,c02,c05,c08,c04,c14,idShow,c01 FROM tvshow WHERE idShow = " . $id;
+					$q = "SELECT c00,c02,c05,c08,c04,c14,idShow,c01 FROM tvshowview WHERE idShow = " . $id;
 					$col1 = array("Episodes","First Aired", "Genre", "Rating", "Network", "Path", "Plot");
 					$temp = dbquery($q);
 					while ($row = $temp->fetch (PDO::FETCH_NUM))
@@ -127,7 +143,11 @@
 						$i++;
 					}
 				?>
-			</table>
+              </table>
+              <form action="" method="post">
+                  <button type="submit">Mark as Watched</Button>
+                  <input type="hidden" name="Watched" value="1">
+              </form>
 			<?php
 		}
 ?>
