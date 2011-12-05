@@ -9,15 +9,6 @@
 				var link = $(this).attr('href');
 				$('#content').load("includes/content.php" + link);
 			});
-			function getUrlVars()
-			{
-				var vars = {};
-				var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value)
-				{
-					vars[key] = value;
-				});
-				return vars;
-			}
 		</script>
 		<?php
 		init();

@@ -42,5 +42,13 @@
 
 	<div id="listing">
 		<!--Placeholder for listing-->
+		<script>
+			$(document).ready( function()
+			{
+				var jview = "<?php echo $_GET['view']; ?>";
+				var jsort = $('select.sortby option:selected').val();
+				$('#listing').load("includes/list.php?view=" + jview + "&sort=" + jsort);
+			});
+		</script>
 	</div>
 </div>
