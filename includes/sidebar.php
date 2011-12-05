@@ -21,13 +21,13 @@
 	<div id="list">
 	<?php
 		$view = $_GET["view"];
-		$sortby = $_POST['sorting'];
+		#$sortby = $_POST['sorting'];
 		echo "VIEW: " . $view . " Sort: " . $sortby;
 		if ($view == NULL) {$view = "movies";}
 		switch ($view)
 		{
 			case "movies":
-				foreach (dbquery("SELECT c00,idMovie FROM movie ORDER BY " . $_POST['sorting']) as $row)
+				foreach (dbquery("SELECT c00,idMovie FROM movie ORDER BY " . $sortby) as $row)
 				{
 					echo "<a href=\"?view=movies&action=getmovie&id=" . $row['idMovie'] . "\">" . $row['c00'] . "</a><br>";
 				}

@@ -8,7 +8,7 @@
 	$username = "xbmc";
 	$password = "xbmc";
 	$database = "xbmc_video";
-	$sortby = "";
+	$sortby = "c00";
 	$tvshowtable = "";			# Differs between db versions, is set in init()
 #	$movietable = "movieview"	# Not needed
 ?>
