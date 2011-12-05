@@ -21,7 +21,7 @@
 				include('includes/nav.php');
 				include('includes/sidebar.php');
 				?>
-				<div id="content">XBMC Database Manager</br>Select Movies/TV-Shows or select a Title</div>
+				<div id="content">XBMC Database Manager</br>Select Movies/TV-Shows or select a Title	</div>
 				<?php
 				//include('includes/content.php');
 				include('includes/footer.php');
