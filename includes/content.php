@@ -1,12 +1,14 @@
-<div id="content">
 <?php
-	$id = $_GET["id"];
-    if ($_POST['Watched'])
+	include('../variables/variables.php');
+	include('functions.php');
+	init();
+	$id = $_GET['id'];
+    /*if ($_POST['Watched'])
     {
 		markWatched($id);
-    }
+    }*/
 	
-	if ($_GET["action"] == "getmovie" || $_GET["action"] == "getshow")
+	if ($_GET['action'] == "getmovie" || $_GET['action'] == "getshow")
 	{
 		PrintContent($id);
 	}
@@ -14,5 +16,5 @@
 	{
 		echo "XBMC Database Manager<br>Select Movies/TV-Shows or select a Title";
 	}
+	dbclose();
 ?>
-</div>

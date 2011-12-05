@@ -41,7 +41,7 @@
 	</div>
 
 	<div id="test">
-		<p>Text!</p>
+		<!--Placeholder for listing-->
 	</div>
 	
 <!--	<div id="list" class="titlelist">
@@ -64,7 +64,7 @@
 			case "shows":
 				foreach (dbquery("SELECT c00,idShow FROM tvshow ORDER BY c00") as $row)
 				{
-					echo "<a href=\"?view=shows&action=getshow&id=" . $row['idShow'] . "\">" . $row['c00'] . "</a><br>";
+					echo "<a href=\"?view=shows&action=getshow&id=" . $row['idShow'] . "\" class=\"contentlink\">" . $row['c00'] . "</a><br>";
 				}
 				break;
 		}

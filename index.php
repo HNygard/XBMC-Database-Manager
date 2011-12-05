@@ -20,7 +20,10 @@
 				init();								#Calls init function, also opens db connection
 				include('includes/nav.php');
 				include('includes/sidebar.php');
-				include('includes/content.php');
+				?>
+				<div id="content">Placeholder</div>
+				<?php
+				//include('includes/content.php');
 				include('includes/footer.php');
 				dbclose();
 			?>
