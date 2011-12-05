@@ -1,28 +1,57 @@
-<div id="sidebar">
+<div id="sidebar" class="listan">
+	<?php $view = $_GET["view"]; ?>
 	<div id="menu">
 	<table border="0">
 		<tr>
-			<th>Sorting:</th>
-			<form method="post"> 
 				<td>
-					<select name="sorting" SIZE="1">
-						<option value="c00" selected="selected">Alphanumerical</option>
-						<option value="c07">Year</option>
+					<select name="sorting" SIZE="1" class="sortby">
+						<?php
+						switch ($view)
+						{
+							case "movies":
+								?>
+								<option value="c00" id="alph">Alphanumerical</option>
+								<option value="c07" id="year">Year</option>
+								<?php
+								break;
+							case "shows":
+								?>
+								<option value="c00" id="alph">Alphanumerical</option>
+								<option value="c05" id="year">First aired</option>
+								<?php
+								break;
+						}
+						?>
 					</select>
 				</td>
 				<td>
-					<!--<button type="submit">Sort</Button>-->
+					<!--<input type="submit" name="sort" class="button" id="refresh" value="Sort" />  -->
+					<input type="button" onclick="sort()" value="Sort" />
+					<script>
+						function sort()
+						{
+							var jview = "<?php echo $_GET['view']; ?>";
+							var jsort = $('select.sortby option:selected').val();
+							$('#test').load("includes/list.php?view=" + jview + "&sort=" + jsort);
+						}
+					</script>
 				</td>
-			</form>
 		</tr>
 	</table>
 	</div>
+
+	<div id="test">
+		<p>Text!</p>
+	</div>
 	
-	<div id="list">
+<!--	<div id="list" class="titlelist">
 	<?php
 		$view = $_GET["view"];
-		#$sortby = $_POST['sorting'];
-		echo "VIEW: " . $view . " Sort: " . $sortby;
+		if ($_POST['sorting'])
+		{
+			$sortby = $_POST['sorting'];
+		}
+		echo "VIEW: " . $view . " Sort: " . $sortby . "<br>";
 		if ($view == NULL) {$view = "movies";}
 		switch ($view)
 		{
@@ -40,5 +69,5 @@
 				break;
 		}
 	?>
-	</div>
+	</div>-->
 </div>

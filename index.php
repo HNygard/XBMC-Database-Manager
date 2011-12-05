@@ -8,17 +8,13 @@
 		<meta charset="ISO-8859-1">
 		<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
 		<title>XBMC Database Manager</title>
-		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
-		<script type="text/javascript">
-			$('#choose').change(function(event) {
-				$('#update').html('This is ' + $('#choose').val() + ' and other info');
-			}); 
-		</script>-->
+		<script src="includes/jquery-1.7.js"></script>
 	</head>
 	<body>
 		<div id="wrapper">
 			<!-- Include PHP files -->
 			<?php
+				include('includes/variables.php');
 				include('includes/header.php');
 				include('includes/functions.php');
 				init();								#Calls init function, also opens db connection

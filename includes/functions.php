@@ -1,4 +1,6 @@
 <?php
+		include('includes/variables.php');
+		
 		function init()
 		{
 			global $tvshowtable;
