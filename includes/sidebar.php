@@ -12,6 +12,7 @@
 						<select name="sortby" SIZE="1" class="sortby">		
 							<option value="c00" id="title">Title</option>
 							<option value="c07" id="year">Year</option>
+							<option value="idMovie" id="year">Added</option>
 						</select>
 					</td><td>
 						<select name="sortdir" SIZE="1" class="sortdir">		
@@ -27,6 +28,7 @@
 						<select name="sortby" SIZE="1" class="sortby">		
 							<option value="c00" id="title">Title</option>
 							<option value="c05" id="year">First aired</option>
+							<option value="idShow" id="year">Added</option>
 						</select>
 					</td><td>
 						<select name="sortdir" SIZE="1" class="sortdir">		
@@ -39,7 +41,7 @@
 			}
 			?>
 				<td>
-					<input type="button" onclick="sort()" value="Sort"/>
+					<input type="button" onclick="sort()" value="Refresh"/>
 					<script>
 						function sort()
 						{
