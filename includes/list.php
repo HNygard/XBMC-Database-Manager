@@ -12,6 +12,11 @@
 		</script>
 		<?php
 		init();
+		if ($_GET['sortdir'])
+		{
+			$sortdir = $_GET['sortdir'];
+		}
+		if ($sortdir == NULL) {$sortdir = "ASC";}
 		if ($_GET['view'])
 		{
 			$view = $_GET['view'];
@@ -22,16 +27,19 @@
 			$sortby = $_GET['sort'];
 		}
 		if ($sortby == NULL) {$sortby = "c00";}
+
 		switch ($view)
 		{
 			case "movies":
-				foreach (dbquery("SELECT c00,idMovie FROM movie ORDER BY " . $sortby) as $row)
+				$q = "SELECT c00,idMovie FROM movie ORDER BY $sortby $sortdir";
+				foreach (dbquery($q) as $row)
 				{
 					echo "<a href=\"?view=movies&action=getmovie&id=" . $row['idMovie'] . "\" id=\"contentlink\">" . $row['c00'] . "</a><br>";
 				}
 				break;
 			case "shows":
-				foreach (dbquery("SELECT c00,idShow FROM " . $tvshowtable . " ORDER BY " . $sortby) as $row)
+				$q = "SELECT c00,idShow FROM $tvshowtable ORDER BY $sortby $sortdir";
+				foreach (dbquery($q) as $row)
 				{
 					echo "<a href=\"?view=shows&action=getshow&id=" . $row['idShow'] . "\" id=\"contentlink\">" . $row['c00'] . "</a><br>";
 				}

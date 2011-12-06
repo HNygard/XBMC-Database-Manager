@@ -3,35 +3,50 @@
 	<div id="menulist">
 	<table border="0">
 		<tr>
-				<td>
-					<select name="sorting" SIZE="1" class="sortby">
-						<?php
-						switch ($view)
-						{
-							case "movies":
-								?>
-								<option value="c00" id="alph">Alphanumerical</option>
-								<option value="c07" id="year">Year</option>
-								<?php
-								break;
-							case "shows":
-								?>
-								<option value="c00" id="alph">Alphanumerical</option>
-								<option value="c05" id="year">First aired</option>
-								<?php
-								break;
-						}
-						?>
-					</select>
-				</td>
+			<?php
+			switch ($view)
+			{
+				case "movies":
+				?>
+					<td>
+						<select name="sortby" SIZE="1" class="sortby">		
+							<option value="c00" id="title">Title</option>
+							<option value="c07" id="year">Year</option>
+						</select>
+					</td><td>
+						<select name="sortdir" SIZE="1" class="sortdir">		
+							<option value="ASC" id="asc">Ascending</option>
+							<option value="DESC" id="des">Descending</option>
+						</select>
+					</td>
+					<?php
+					break;
+				case "shows":
+				?>
+					<td>
+						<select name="sortby" SIZE="1" class="sortby">		
+							<option value="c00" id="title">Title</option>
+							<option value="c05" id="year">First aired</option>
+						</select>
+					</td><td>
+						<select name="sortdir" SIZE="1" class="sortdir">		
+							<option value="ASC" id="asc">Ascending</option>
+							<option value="DESC" id="desc">Descending</option>
+						</select>
+					</td>
+					<?php
+					break;
+			}
+			?>
 				<td>
 					<input type="button" onclick="sort()" value="Sort"/>
 					<script>
 						function sort()
 						{
 							var jview = "<?php echo $_GET['view']; ?>";
-							var jsort = $('select.sortby option:selected').val();
-							$('#listing').load("includes/list.php?view=" + jview + "&sort=" + jsort);
+							var jsortby = $('select.sortby option:selected').val();
+							var jsortdir = $('select.sortdir option:selected').val();
+							$('#listing').load("includes/list.php?view=" + jview + "&sort=" + jsortby + "&sortdir=" + jsortdir);
 						}
 					</script>
 				</td>
