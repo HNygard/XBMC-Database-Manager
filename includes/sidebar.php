@@ -1,6 +1,6 @@
-<div id="sidebar" class="listan">
+<div id="sidebar">
 	<?php $view = $_GET["view"]; ?>
-	<div id="menu">
+	<div id="menulist">
 	<table border="0">
 		<tr>
 				<td>
@@ -25,8 +25,7 @@
 					</select>
 				</td>
 				<td>
-					<!--<input type="submit" name="sort" class="button" id="refresh" value="Sort" />  -->
-					<input type="button" onclick="sort()" value="Sort" />
+					<input type="button" onclick="sort()" value="Sort"/>
 					<script>
 						function sort()
 						{
@@ -36,16 +35,16 @@
 						}
 					</script>
 				</td>
-		</tr>
-	</table>
+			</tr>
+		</table>
 	</div>
 
 	<div id="listing">
-		<!--Placeholder for listing-->
+		<!--Placeholder for movie/show list-->
 		<script>
 			$(document).ready( function()
 			{
-				var jview = "<?php echo $_GET['view']; ?>";
+				var jview = "<?php echo $_GET['view'];?>";
 				var jsort = $('select.sortby option:selected').val();
 				$('#listing').load("includes/list.php?view=" + jview + "&sort=" + jsort);
 			});

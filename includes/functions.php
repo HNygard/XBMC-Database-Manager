@@ -21,32 +21,6 @@
 			}
 		}
 		
-		function drawOptions($watched)
-		{
-			?>
-            <div id="options">
-				<form action="" method="post">
-					<?php
-					switch ($watched)
-					{
-						case "Yes":
-							?>
-							<button type="submit">Mark as Not Watched</Button>
-							<input type="hidden" name="Watched" value="2">
-							<?php
-							break;
-						case "No":
-							?>
-							<button type="submit">Mark as Watched</Button>
-							<input type="hidden" name="Watched" value="1">
-							<?php
-							break;
-					}?>
-				</form>
-			</div>
-			<?php
-		}
-		
 		function dbopen()
 		{
 			global $dbconn, $hostname, $database, $username, $password;
@@ -59,6 +33,7 @@
 				printf($e->getMessage());
 			}
 		}
+		
 		function dbclose()
 		{
 			global $dbconn;
@@ -129,28 +104,6 @@
 			return $count;
 		}
 
-		function markWatched($id)
-        {
-			if($_GET["view"] == "shows" )
-			{
-				echo "<script type='text/javascript'>alert(\"NOT SUPPORTED YET!\")</script>";
-				return;
-			}
-          
-			$table = ($_GET["view"] == "shows" ) ? $tvshowtable : "movieview";
-			$idType = ($_GET["view"] == "shows" ) ? "idShow" : "idMovie"; 
-			switch ($_POST["Watched"])
-			{
-				case 1:
-					$q = "UPDATE $table SET playCount = 1 WHERE $idType = $id AND playCount IS NULL";
-					break;
-				case 2:
-					$q = "UPDATE $table SET playCount = NULL WHERE $idType = $id AND playCount = 1";
-					break;
-			}
-			dbquery($q);
-        }
-		
 		function PrintContent($id)
 		{
 			global $tvshowtable;
@@ -178,7 +131,6 @@
 					$col2[6] = getPath($id);
 					break;
 			}
-			drawOptions($col2[13]);
 			?>
 			<table border="0">
 				<tr>

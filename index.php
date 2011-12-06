@@ -14,16 +14,19 @@
 		<div id="wrapper">
 			<!-- Include PHP files -->
 			<?php
-				include('includes/variables.php');
-				include('includes/header.php');
-				include('includes/functions.php');
-				init();								#Calls init function, also opens db connection
-				include('includes/nav.php');
-				include('includes/sidebar.php');
+				include('includes/variables.php');		#Global variables
+				include('includes/header.php');			#Draws header (logo?)
+				include('includes/functions.php');		#Includes some database functions (init, query, etc)
+				init();									#Calls init function, also opens db connection
+				include('includes/nav.php');			#Draws navigation bar
+				include('includes/sidebar.php');		#Draws sidebar (list)
 				?>
-				<div id="content">XBMC Database Manager</br>Select Movies/TV-Shows or select a Title	</div>
+				<!--The following div will be populated when a show/movie is selected-->
+				<div id="content">
+					<div id="menucontent"></div>
+					<h5>XBMC Database Manager</br>Select Movies/TV-Shows or select a Title</h5>
+				</div>
 				<?php
-				//include('includes/content.php');
 				include('includes/footer.php');
 				dbclose();
 			?>
