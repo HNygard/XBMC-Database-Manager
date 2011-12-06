@@ -116,7 +116,8 @@
 					while ($row = $temp->fetch (PDO::FETCH_NUM))
 						$col2 = $row;										#Sets last row from query
 					$col2[7] = number_format($col2[7],1);					#Format rating to 1 decimal
-					$col2[10] = getPath($id) . MovieFile($id);
+					$col2[10] = getPath($id) . MovieFile($id);				#Gets whole path to file
+					$col2[11] = "<a href=\"http://www.imdb.com/title/$col2[11]\">IMDB</a>";	#Creates link to IMDB
                     $col2[13] = $col2[13] ? "Yes" : "No";
 					break;
 					
