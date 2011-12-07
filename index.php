@@ -15,18 +15,17 @@
 			<!-- Include PHP files -->
 			<?php
 				include('includes/variables.php');		#Global variables
-				include('includes/header.php');			#Draws header (logo?)
+				include('includes/header.php');			#Draws header (logo)
 				include('includes/functions.php');		#Includes some database functions (init, query, etc)
-				init();									#Calls init function, also opens db connection
+				init();									#Calls init function, opens db connection and determines db version
 				include('includes/nav.php');			#Draws navigation bar
 				include('includes/sidebar.php');		#Draws sidebar (list)
-				?>
-				<!--The following div will be populated when a show/movie is selected-->
-				<div id="content">
-					<div id="menucontent"></div>
-					<h5>XBMC Database Manager</br>Select Movies/TV-Shows or select a Title</h5>
-				</div>
-				<?php
+			?>
+			<!--The following div will be populated when a show/movie is selected-->
+			<div id="content">
+				<h5>XBMC Database Manager</br>Select Movies/TV-Shows or select a Title</h5>
+			</div>
+			<?php
 				include('includes/footer.php');
 				dbclose();
 			?>

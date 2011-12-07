@@ -152,4 +152,50 @@
               </table>
 			<?php
 		}
+		function PrintOptions($id)
+		{
+			global $tvshowtable;
+			$view = $_GET['view'];
+			$action = $_GET['action'];
+			$page = $_GET['page'];
+			$id = $_GET['id'];
+			$q = "SELECT playCount FROM movieview WHERE idMovie = " . $id;
+			foreach (dbquery($q) as $temp)
+			{
+				$watched = $temp['playCount'];
+				$watched = $watched ? "Yes" : "No";
+			}
+			?>
+			<table border="1">
+				<tr>
+					<?php
+					switch ($_GET["view"])
+					{
+						case "movies":
+							echo "<th>Watched</th>";
+							echo "<td>$watched</td>";
+							?><td><?php
+							switch ($watched)
+							{
+								case "Yes":
+									?>
+									<button id="watchedbutton" type="button" onclick="mark()" value="0">Mark as Not Watched</Button>
+									<?php
+									break;
+								case "No":
+									?>
+									<button id="watchedbutton" type="button" onclick="mark()" value="1">Mark as Watched</Button>
+									<?php
+									break;
+							}
+							?></td><?php
+							break;
+						case "shows":
+							break;
+					}
+				?>
+				</tr>
+			</table>
+			<?php
+		}
 ?>

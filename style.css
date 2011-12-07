@@ -31,24 +31,33 @@ a {
 	background-color:#000;
 }
 
-#tabview {
+/*  Style for Navigation tabs */
+/*  Borrowed from something i found online, sorry can't find url/author */
+#nav {
 	float: left;
-	width:100%;
+	width:300px;
 	background: url('images/tab-background.png' )repeat-x 100% bottom;
 }
-#tabview ul{
+#contentnav {
+	float: left;
+	width:900px;
+	height:38px;
+	background: url('images/tab-background.png' )repeat-x 100% bottom;
+}
+#tabs ul{
 	margin: 0;
 	padding: 2px 10px 0px 3px;
 	list-style: none;
 	height: 36px;
+	list-style-type: none;
 }
-#tabview li{
+#tabs li{
 	float: left;
 	background: url('images/tab-left.png' ) no-repeat left top;
 	padding: 0px 0px 0px 3px;
 	height: 36px;
 }
-#tabview a {
+#tabs a {
 	float: left;
 	margin: 0px;
 	background: url('images/tab-right.png' ) no-repeat right top;
@@ -58,29 +67,29 @@ a {
 	white-space: nowrap;
 	height: 36px;
 }
-#tabview a:hover {
+#tabs a:hover {
 	color: black;
 	background: url('images/hover-tab.png' ) no-repeat right top;
 }
-#tabview #current {
+#tabs #current {
 	background:url('images/current-tab-left.png' )  no-repeat left top;
 	float: left;
 	margin: 0;
 	padding: 0px 0px 0px 2px;
 	height: 36px;
 }
-#tabview #current a {
+#tabs #current a {
 	background-image: url('images/current-tab-right.png' );
 	color: black;
 	white-space: nowrap;
 	height: 36px;
 	padding: 6px 15px 0px 6px;
 }
+/*  End style for Navigation tabs */
 
 #footer {
 	clear:both;
 	position:relative;
-	bottom:-4px;
 	border-top:1px solid #ccc;
 	border-left:1px solid #ccc;
 	border-right:1px solid #999;
@@ -92,13 +101,8 @@ a {
 
 #sidebar {
 	width:300px;
-	height:679px;
+	#height:680px;
 	float:left;
-}
-#content {
-	width:896px;
-	height:679px;
-	float:right;
 }
 
 #menulist {
@@ -110,19 +114,10 @@ a {
 	border-right:1px solid #999;
 	border-bottom:1px solid #999;
 }
-#menucontent {
-	width:100%;
-	height:32px;
-	float:right;
-	border-top:1px solid #ccc;
-	border-left:1px solid #ccc;
-	border-right:1px solid #999;
-	border-bottom:1px solid #999;
-}
 
-#info {
+#content {
 	width:876px;
-	height:627px;
+	height:662px;
 	float:right;
 	padding:10px;
 	overflow: auto;
@@ -134,7 +129,7 @@ a {
 
 #listing {
 	width:280px;
-	height:627px;
+	height:628px;
 	float:left;
 	padding:10px;
 	overflow: auto;

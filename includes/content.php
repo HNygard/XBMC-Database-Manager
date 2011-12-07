@@ -1,22 +1,18 @@
-<?php
-	include('../variables/variables.php');
-	include('functions.php');
-	init();
-	$view = $_GET['view'];
-	$action = $_GET['action'];
-	$id = $_GET['id'];
-	$q = "SELECT playCount FROM movieview WHERE idMovie = " . $id;
-	foreach (dbquery($q) as $temp)
-	{
-		$watched = $temp['playCount'];
-	}
-?>
 <script>
+	$(document).ready(function() {
+		var jview = "<?php echo $_GET['view'];?>";
+		var jpage = "<?php echo $_GET['page'];?>";
+		var jaction = "<?php echo $_GET['action'];?>";
+		var jid = "<?php echo $_GET['id'];?>";
+		$('#contentnav').load("includes/contentmenu.php?view="+jview+"&action="+jaction+"&page="+jpage+"&id="+jid);
+	});
+
 	function mark()
 	{
-		var jview = "<?php echo $view;?>";
-		var jaction = "<?php echo $action;?>";
-		var jid = "<?php echo $id;?>";
+		var jview = "<?php echo $_GET['view'];?>";
+		var jpage = "<?php echo $_GET['page'];?>";
+		var jaction = "<?php echo $_GET['action'];?>";
+		var jid = "<?php echo $_GET['id'];?>";
 		var jwatched = document.getElementById('watchedbutton').value;
 		$.ajax({
 			url: "includes/watched.php",
@@ -25,46 +21,47 @@
 			success: function(data)
 			{
 				//Reloads the content after script is finished
-				$('#content').load("includes/content.php?view=" + jview + "&action=" + jaction + "&id=" + jid);
+				$('#content').load("includes/content.php?view=" + jview + "&action=" + jaction + "&page=" + jpage + "&id=" + jid);
 			}
 		});
 	}
 </script>
 
-<div id="menucontent">
+<?php
+	include('../variables/variables.php');
+	include('functions.php');
+	init();
+	$view = $_GET['view'];
+	$action = $_GET['action'];
+	$page = $_GET['page'];
+	$id = $_GET['id'];
+	
+	switch ($page)
+	{
+		case "info":
+			if ($action == "getmovie" || $action == "getshow")
+			{
+				PrintContent($id);
+			}
+			else
+			{
+				echo "XBMC Database Manager<br>Select Movies/TV-Shows or select a Title";
+			}
+			break;
+		case "options":
+			PrintOptions($id);
+			break;
+	}
+	dbclose();
+?>
+
+
+<!--<div id="menucontent">
 	<table border="0">
 		<tr>
 			<td>
-				<?php
-				switch ($watched)
-				{
-					case !NULL:
-					?>
-						<button id="watchedbutton" type="button" onclick="mark()" value="0">Mark as Not Watched</Button>
-						<?php
-						break;
-					case NULL:
-					?>
-						<button id="watchedbutton" type="button" onclick="mark()" value="1">Mark as Watched</Button>
-						<?php
-						break;
-				}
-				?>
 			</td>
 		</tr>
 	</table>	
-</div>
+</div>-->
 
-<div id="info">
-	<?php
-	if ($action == "getmovie" || $action == "getshow")
-	{
-		PrintContent($id);
-	}
-	else
-	{
-		echo "XBMC Database Manager<br>Select Movies/TV-Shows or select a Title";
-	}
-	dbclose();
-	?>
-</div>
