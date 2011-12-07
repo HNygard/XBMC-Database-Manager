@@ -12,9 +12,9 @@ p {
 	margin:3px;
 }
 
-#a {
-#	margin: 10px;
-#}
+a {
+	margin: 10px;
+}
 
 #wrapper {
 	margin:0 auto;
@@ -50,6 +50,7 @@ p {
 }
 #tabview a {
 	float: left;
+	margin: 0px;
 	background: url('images/tab-right.png' ) no-repeat right top;
 	padding: 6px 15px 0px 6px;
 	text-decoration: none;
