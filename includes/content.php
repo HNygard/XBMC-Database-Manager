@@ -1,3 +1,4 @@
+<script src="includes/jquery-1.7.js"></script>
 <script>
 	$(document).ready(function() {
 		var jview = "<?php echo $_GET['view'];?>";
@@ -7,6 +8,12 @@
 		$('#contentnav').load("includes/contentmenu.php?view="+jview+"&action="+jaction+"&page="+jpage+"&id="+jid);
 	});
 
+	$(".editbutton").click(function(){
+		var id = this.id;
+		var value = this.value;
+		alert("Button ID: "+id+" Value: "+value);
+	});
+	
 	function mark()
 	{
 		var jview = "<?php echo $_GET['view'];?>";
@@ -48,20 +55,9 @@
 				echo "XBMC Database Manager<br>Select Movies/TV-Shows or select a Title";
 			}
 			break;
-		case "options":
+		case "edit":
 			PrintOptions($id);
 			break;
 	}
 	dbclose();
 ?>
-
-
-<!--<div id="menucontent">
-	<table border="0">
-		<tr>
-			<td>
-			</td>
-		</tr>
-	</table>	
-</div>-->
-

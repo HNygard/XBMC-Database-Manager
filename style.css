@@ -16,6 +16,9 @@ a {
 	margin: 10px;
 }
 
+h1{
+	text-align: left;
+}
 #wrapper {
 	margin:0 auto;
 	width:1200px;
