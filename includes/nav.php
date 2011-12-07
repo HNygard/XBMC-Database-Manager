@@ -1,5 +1,31 @@
 <div id="nav">
-	<a href="?view=movies">Movies</a>
-	<a href="?view=shows">TV-Shows</a>
-	<a href="?view=music">Music</a>
+	<div id="tabview">
+		<ul>
+		<?php
+			switch ($_GET['view'])
+			{
+				case "movies":
+					echo "<li id=\"current\"><a href=\"?view=movies\">Movies</a></li>";
+					echo "<li><a href=\"?view=shows\">TV-Shows</a></li>";
+					echo "<li><a href=\"?view=music\">Music</a></li>";
+					break;
+				case "shows":
+					echo "<li><a href=\"?view=movies\">Movies</a></li>";
+					echo "<li id=\"current\"><a href=\"?view=shows\">TV-Shows</a></li>";
+					echo "<li><a href=\"?view=music\">Music</a></li>";
+					break;			
+				case "music":
+					echo "<li><a href=\"?view=movies\">Movies</a></li>";
+					echo "<li><a href=\"?view=shows\">TV-Shows</a></li>";
+					echo "<li id=\"current\"><a href=\"?view=music\">Music</a></li>";
+					break;			
+				default:
+					echo "<li><a href=\"?view=movies\">Movies</a></li>";
+					echo "<li><a href=\"?view=shows\">TV-Shows</a></li>";
+					echo "<li><a href=\"?view=music\">Music</a></li>";
+					break;			
+			}
+		?>
+		</ul>
+	</div>
 </div>

@@ -34,14 +34,14 @@
 				$q = "SELECT c00,idMovie FROM movie ORDER BY $sortby $sortdir";
 				foreach (dbquery($q) as $row)
 				{
-					echo "<a href=\"?view=movies&action=getmovie&id=" . $row['idMovie'] . "\" id=\"contentlink\">" . $row['c00'] . "</a><br>";
+					echo "<li><a href=\"?view=movies&action=getmovie&id=" . $row['idMovie'] . "\" id=\"contentlink\">" . $row['c00'] . "</a></li>";
 				}
 				break;
 			case "shows":
 				$q = "SELECT c00,idShow FROM $tvshowtable ORDER BY $sortby $sortdir";
 				foreach (dbquery($q) as $row)
 				{
-					echo "<a href=\"?view=shows&action=getshow&id=" . $row['idShow'] . "\" id=\"contentlink\">" . $row['c00'] . "</a><br>";
+					echo "<li><a href=\"?view=shows&action=getshow&id=" . $row['idShow'] . "\" id=\"contentlink\">" . $row['c00'] . "</a></li>";
 				}
 				break;
 		}
