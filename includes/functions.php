@@ -160,17 +160,8 @@
 		$temp = dbquery($q);
 		while ($row = $temp->fetch (PDO::FETCH_NUM))
 			$col2 = $row;	
-		/*foreach (dbquery($q) as $temp)
-		{
-			$title = $temp['c00'];
-			$watched = $temp['playCount'];
-			$watched = $watched ? "Yes" : "No";
-			$path = $temp['strPath'];
-			$file = $temp['strFileName'];
-		}*/
 		$col1 = array("Title","Watched","Path","Filename");
 		$col2['1'] = $col2['1'] ? "Yes" : "No";
-		//$col2 = array($title,$watched,$path,$file);
 		?>
 		<!--Loops throuch arrays containing info, printing to a table-->
 		<table border="1">
@@ -183,34 +174,6 @@
 				}
 			?>
 		</table>
-
-<!--		<table border="1">
-			<tr><?php
-				switch ($_GET["view"])
-				{
-					case "movies":
-						echo "<th>Watched</th>";
-						echo "<td>$watched</td>";?>
-						<td border="0"><?php
-							switch ($col2['1'])
-							{
-								case "Yes":
-									?>
-									<button id="watchedbutton" type="button" onclick="mark()" value="0">Mark as Not Watched</button>
-									<?php
-									break;
-								case "No":
-									?>
-									<button id="watchedbutton" type="button" onclick="mark()" value="1">Mark as Watched</button>
-									<?php
-									break;
-							}?>
-						</td><?php
-						break;
-					case "shows":
-						break;
-				}?>
-			</tr>
-		</table>--><?php
+		<?php
 	}
 ?>

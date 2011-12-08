@@ -12,11 +12,11 @@
 
 	switch ($watched)
 	{
-		case 1:
+		case "No":
 			$q = "UPDATE $table SET playCount = 1 WHERE $idType = $id AND playCount IS NULL";
 			echo $q;
 			break;
-		case 0:
+		case "Yes":
 			$q = "UPDATE $table SET playCount = NULL WHERE $idType = $id AND playCount IS NOT NULL";
 			echo $q;
 			break;

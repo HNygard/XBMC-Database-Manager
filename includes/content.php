@@ -1,4 +1,3 @@
-<script src="includes/jquery-1.7.js"></script>
 <script>
 	$(document).ready(function() {
 		var jview = "<?php echo $_GET['view'];?>";
@@ -7,20 +6,40 @@
 		var jid = "<?php echo $_GET['id'];?>";
 		$('#contentnav').load("includes/contentmenu.php?view="+jview+"&action="+jaction+"&page="+jpage+"&id="+jid);
 	});
-
+	
 	$(".editbutton").click(function(){
-		var id = this.id;
-		var value = this.value;
-		alert("Button ID: "+id+" Value: "+value);
+		var jview = "<?php echo $_GET['view'];?>";
+		var jpage = "<?php echo $_GET['page'];?>";
+		var jaction = "<?php echo $_GET['action'];?>";
+		var jid = "<?php echo $_GET['id'];?>";
+			
+		switch (this.id)
+		{
+			case "Title":
+				alert("Edit " + this.id + ", Value = " + this.value + jid);
+				break;
+			case "Watched":
+				markWatched(this);
+				break;
+			case "Path":
+				alert("Edit " + this.id + ", Value = " + this.value);
+				break;
+			case "Filename":
+				alert("Edit " + this.id + ", Value = " + this.value);
+				break;
+			default:
+				alert("Something bad happened");
+				break;
+		}
 	});
 	
-	function mark()
+	function markWatched(which)
 	{
 		var jview = "<?php echo $_GET['view'];?>";
 		var jpage = "<?php echo $_GET['page'];?>";
 		var jaction = "<?php echo $_GET['action'];?>";
 		var jid = "<?php echo $_GET['id'];?>";
-		var jwatched = document.getElementById('watchedbutton').value;
+		var jwatched = which.value;
 		$.ajax({
 			url: "includes/watched.php",
 			type: "POST",
