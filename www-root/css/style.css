@@ -37,10 +37,14 @@ a {
 #user {
 	float: right;
 	margin: 10px;
+	color: white;
 }
 #user label{
 	color: white;
 	text-align: center;
+}
+#user a{
+	text-decoration: none;
 }
 
 /*********************
