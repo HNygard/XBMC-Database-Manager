@@ -1,22 +1,24 @@
 /**********************
  * For the movie view *
  **********************/
-// Function viewmovie, updates content navigation and content for movie info view
-function viewmovie(id, view)
-{
-	if (view)
-	{
-		$('#contentnav').load("movies/viewcontentnav?id=" + id + "&view=" + view);
-		$('#content').load("movies/viewmovie?id=" + id + "&view=" + view);
-		return false;
-	}
-	else
-	{
-		$('#contentnav').load("movies/viewcontentnav?id=" + id);
-		$('#content').load("movies/viewmovie?id=" + id);
-	}
-	return false;
-}
+// Function viewmovie, updates content navigation and content for movie info view --//
+function viewmovie(id, view)														//
+{																					//
+	if (view)																		//
+	{																				//
+		$('#contentnav').load("movies/viewcontentnav?id=" + id + "&view=" + view);	//
+		$('#content').load("movies/viewmovie?id=" + id + "&view=" + view);			//
+		return false;																//
+	}																				//
+	else																			//
+	{																				//
+		$('#contentnav').load("movies/viewcontentnav?id=" + id);					//
+		$('#content').load("movies/viewmovie?id=" + id);							//
+	}																				//
+	return false;																	//
+}																					//
+// End function viewmovie(id, view) ------------------------------------------------//
+
 // Function editmovie, updates content navigation and content for movie edit view
 function editmovie(object)
 {

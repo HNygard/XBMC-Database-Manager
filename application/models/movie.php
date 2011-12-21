@@ -1,8 +1,11 @@
 <?php  
 	class Movie extends CI_Model
 	{
-		var $view = NULL;
-		
+		function __construct()
+		{
+			parent::__construct();
+		}
+
 		public function editmovie($id, $what, $tovalue)
 		{
 			$editdata = array();

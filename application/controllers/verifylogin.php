@@ -4,8 +4,8 @@
 		function __construct()
 		{
 			parent::__construct();
-			//$this->load->model('user','',TRUE);
 			$this->load->model('user');
+			$this->load->library('ConfigDB');
 		}
 		
 		function index()

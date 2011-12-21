@@ -1,5 +1,8 @@
+/*************
+ * HTML body *
+ *************/
 body {
-	background-color:#000000;
+	background-color:#222;
 	font-family: georgia,sans-serif;
 }
 p {

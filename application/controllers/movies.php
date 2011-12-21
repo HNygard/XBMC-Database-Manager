@@ -4,101 +4,129 @@
 	
 	class Movies extends CI_Controller
 	{
-		function __construct()
-		{
-			// Call the Model constructor
-			parent::__construct();
-			$this->load->model('movie');										// Init the model
-		}
-		
-		public function index()
-		{
-			$this->load->helper(array('form', 'url'));							// Load the url helper
-			$data['title'] = 'Movies';											// Set page title
-			$this->load->view('header', $data);									// Load page header
-			$this->load->view('movies/navigation');								// Load page navigation
-			$this->load->view('movies/sidebar');								// Load page navigation
-			$this->load->view('content');										// Load page content, send $data along
-			$this->load->view('footer');										// Load page footer
-		}
+		// Class constructor -----------------------------------------------------------//
+		function __construct()															//
+		{																				//
+			parent::__construct();														// Calls the parent class constructor
+			$this->load->model('movie');												// Init the model
+			$this->load->library('ConfigDB');											// Load the database config class
+			$dbconn = $this->configdb->xbmcdb();										// Gets the XBMC Database connection config
+			$this->load->database($dbconn);												// Loads the XBMC Database
+		}																				//
+		// End __construct() -----------------------------------------------------------//
 
-		public function edit()
-		{
-			$editwhat = $this->input->post('what');
-			$movieid = $this->input->post('id');
-			$towhat = $this->input->post('to');
-			if($this->session->userdata('logged_in'))
-			{
-				$this->movie->editmovie($movieid, $editwhat, $towhat);
-			}
-		}
+		// Index controller ------------------------------------------------------------//
+		public function index()															//
+		{																				//
+			$this->load->helper(array('form', 'url'));									// Load the url helper
+			$data['title'] = 'Movies';													// Set page title
+			$this->load->view('header', $data);											// Load page header
+			$this->load->view('movies/navigation');										// Load page navigation
+			$this->load->view('movies/sidebar');										// Load page navigation
+			$this->load->view('content');												// Load page content, send $data along
+			$this->load->view('footer');												// Load page footer
+		}																				//
+		// End function index() --------------------------------------------------------//
+
+		// Edit database values --------------------------------------------------------//
+		public function edit()															//
+		{																				//
+			$editwhat = $this->input->post('what');										// What to edit
+			$movieid = $this->input->post('id');										// Which Movie ID the value belongs to
+			$towhat = $this->input->post('to');											// The new value
+			if($this->session->userdata('logged_in'))									// Check to see that a user is logged in
+			{																			//
+				$this->movie->editmovie($movieid, $editwhat, $towhat);					// If user is logged in, call the edit function
+			}																			//
+		}																				//
+		// End function edit() ---------------------------------------------------------//
 		
-		// Function to render the html formatted movie list
-		public function getlist()
-		{
-			if ($this->input->get('sortby') != "")
-			{
-				$sortby = $this->input->get('sortby');							// Get info about movie
-				$sortdir = $this->input->get('sortdir');						// Get info about movie
-				$filter = $this->input->get('filter');							// Get info about movie
-				$data['list'] = $this->movie->getmovielinks($sortby, $sortdir, $filter);						// Puts all movietitles in an array as "<a href="idMovie">Title</a>"
-			}
-			else
-			{
-				$data['list'] = $this->movie->getmovielinks();					// Puts all movietitles in an array as "<a href="idMovie">Title</a>"
-			}
-			$this->load->view('list', $data);							// Load page navigation
-		}
+		// Renders the html formatted movie list ---------------------------------------//
+		public function getlist()														//
+		{																				//
+			if ($this->input->get('sortby') != "")										// Check to see if a sorting option is chosen
+			{																			//
+				$sortby = $this->input->get('sortby');									// Get sortby value 
+				$sortdir = $this->input->get('sortdir');								// Get sorting direction (Ascending/descending)
+				$filter = $this->input->get('filter');									// Get filter options
+				$data['list'] = $this->movie->getmovielinks($sortby, $sortdir, $filter);// Puts all movie titles in an array (as a href) 
+			}																			//
+			else																		// If there is no sorting options:
+			{																			//
+				$data['list'] = $this->movie->getmovielinks();							// Puts all movie titles in an array (as a href) 
+			}																			//
+			$this->load->view('list', $data);											// Load the list view with movie titles
+		}																				//
+		// End function getlist() ------------------------------------------------------//
 		
-		// Function to render the html formatted content
-		public function viewmovie()
-		{
-			if ($this->input->get('view'))
-			{
-				$this->session->set_userdata('view', $this->input->get('view'));
-			}
-			switch($this->session->userdata('view'))
-			{
-				case 'info':
-					$movieinfo = $this->movie->getmovieinfo($this->input->get('id'));		// Get info about movie
-					$this->load->view('info.php', $movieinfo);					// Load page footer
-					break;
-				case 'edit':
-					if($this->session->userdata('logged_in'))
-					{
-						$movieedit = $this->movie->getmovieedit($this->input->get('id'));	// Get edit page for the movie
-						$this->load->view('movies/movieedit.php', $movieedit);				// Load page footer
-					}
-					else
-					{
-						$movieinfo = $this->movie->getmovieinfo($this->input->get('id'));	// Get info about movie
-						$this->load->view('info.php', $movieinfo);				// Load page footer
-					}
-					break;
-				default:
-					$movieinfo = $this->movie->getmovieinfo($this->input->get('id'));		// Get info about movie
-					$this->load->view('info.php', $movieinfo);					// Load page footer
-					break;
-			}
-		}
+		// Renders the html formatted movie content ------------------------------------//
+		public function viewmovie()														//
+		{																				//
+			$view = $this->input->get('view');											// Which view (info/edit/etc)
+																						//
+			if ($view != '')															// If view is set
+			{																			//
+				$this->session->set_userdata('view', $this->input->get('view'));		// Set session view to view
+			}																			//
+			if ($this->session->userdata('view') == '')									// If session view is empty
+			{																			//
+				$this->session->set_userdata('view', 'info');							// Set session view to info
+			}																			//
+																						//
+			switch($this->session->userdata('view'))									//
+			{																			//
+				case 'info':															// If view is info
+					$movieinfo = $this->movie->getmovieinfo($this->input->get('id'));	// Get info about movie
+					$this->load->view('info.php', $movieinfo);							// Load the info view
+					break;																//
+				case 'edit':															// If view is edit
+					if($this->session->userdata('logged_in'))							// And a user is logged in
+					{																	//
+						$movieedit = $this->movie->getmovieedit($this->input->get('id'));// Get edit page for the movie
+						$this->load->view('movies/movieedit.php', $movieedit);			// Load the edit view
+					}																	//
+					else																// If there isn't a user logged in
+					{																	//
+						$movieinfo = $this->movie->getmovieinfo($this->input->get('id'));// Get info about movie
+						$this->load->view('info.php', $movieinfo);						// Load the info view
+					}																	//
+					break;																//
+				default:																// If a view isn't matched
+					$movieinfo = $this->movie->getmovieinfo($this->input->get('id'));	// Get info about movie
+					$this->load->view('info.php', $movieinfo);							// Load the info view
+					break;																//
+			}																			//
+		}																				//
+		// End function viewmovie() ----------------------------------------------------//
 		
-		// Function to render the html formatted content navigation
-		public function viewcontentnav()
-		{
-			$data = array();
-			if(!$this->session->userdata('view'))
-			{
-				$this->session->set_userdata('view', 'info');
-			}
-			if ($this->input->get('view'))
-			{
-				$this->session->set_userdata('view', $this->input->get('view'));
-			}
-			$id = $this->input->get('id');
-			$data['menulist'] = $this->movie->getmoviemenu($id, $this->session->userdata('view'));
-			$data['selected'] = $this->session->userdata('view');
-			$this->load->view('contentnav.php', $data);
-		}
+		// Renders the html formatted content navigation -------------------------------//
+		public function viewcontentnav()												//
+		{																				//
+			$data = array();															// Set data to empty array
+			if($this->input->get('view') != '')											// If view isn't empty
+			{																			//
+				$this->session->set_userdata('view', $this->input->get('view'));		// set session view to view
+			}																			//
+			if(!$this->session->userdata('view') || $this->session->userdata('view') == '')	// If session view isn't set or session view is empty
+			{																			//
+				$this->session->set_userdata('view', 'info');							// Set session view to info
+			}																			//
+			if($this->session->userdata('view') == 'epinfo')							// If session view is set to episode info
+			{																			//
+				$this->session->set_userdata('view', 'info');							// Set session view to info
+			}																			//
+			$id = $this->input->get('id');												//
+			$view = $this->session->userdata('view');									//
+			$data['menulist'] = $this->movie->getmoviemenu($id, $view);					//
+			$data['selected'] = $this->session->userdata('view');						//
+			$this->load->view('contentnav.php', $data);									//
+		}																				//
+		// End function viewcontentnav() -----------------------------------------------//
+	
+		function __destruct()															//
+		{																				//
+			$this->db->close;													// Loads the XBMC Database
+		}																				//
 	}
 /* End of file movies.php */
 /* Location: ./application/controllers/movies.php */
