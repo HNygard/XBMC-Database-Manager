@@ -20,11 +20,11 @@
 		{																				//
 			$this->load->helper(array('form', 'url'));									// Load the url helper
 			$data['title'] = 'TV-Shows';												// Set page title
-			$this->load->view('header', $data);											// Load page header
+			$this->load->view('common/header', $data);									// Load page header
 			$this->load->view('shows/navigation');										// Load page navigation
 			$this->load->view('shows/sidebar');											// Load page navigation
-			$this->load->view('content');												// Load page content, send $data along
-			$this->load->view('footer');												// Load page footer
+			$this->load->view('common/content');										// Load page content, send $data along
+			$this->load->view('common/footer');											// Load page footer
 		}																				//
 		// End function index() --------------------------------------------------------//
 
@@ -56,7 +56,7 @@
 			{																			//
 				$data['list'] = $this->show->getshowlinks();							// Put all tv-show titles in an array (as a href)
 			}																			//
-			$this->load->view('list', $data);											// Load the list view with tv-show titles
+			$this->load->view('common/list', $data);									// Load the list view with tv-show titles
 		}																				//
 		// End function getlist()-------------------------------------------------------//
 		
@@ -67,7 +67,7 @@
 			$season = $this->input->get('season');										// Which season
 			$filter = $this->input->get('filter');										// Get filter option (watched/not watched)
 			$data['list'] = $this->show->getepisodelinks($idshow, $season, $filter);	// Put all the episode titles in an array
-			$this->load->view('list', $data);											// Load the list view with episode titles
+			$this->load->view('common/list', $data);									// Load the list view with episode titles
 		}																				//
 		// End function getepisodes()---------------------------------------------------//
 
@@ -100,7 +100,7 @@
 			{																			//
 				case 'info':															// If view is info
 					$info = $this->show->getshowinfo($idshow);							// Get the showinfo
-					$this->load->view('info.php', $info);								// Load the info view
+					$this->load->view('common/info.php', $info);						// Load the info view
 					break;																//
 				case 'edit':															// If view is edit
 					if($this->session->userdata('logged_in'))							// Check to see that a user is logged in
@@ -111,16 +111,16 @@
 					else																// IF user isn't logged in
 					{																	//
 						$info = $this->show->getshowinfo($idshow);						// Get the show info
-						$this->load->view('info.php', $info);							// And load the info view instead
+						$this->load->view('common/info.php', $info);					// And load the info view instead
 					}																	//
 					break;																//
 				case 'epinfo':															// If view is episode info
 					$info = $this->show->getepisodeinfo($idepisode);					// Get episode info
-					$this->load->view('info.php', $info);								// Load the info view
+					$this->load->view('common/info.php', $info);						// Load the info view
 					break;																//
 				default:																// If a view isn't matched
 					$info = $this->show->getshowinfo($idshow);							// Get show info
-					$this->load->view('info.php', $info);								// Load info view
+					$this->load->view('common/info.php', $info);						// Load info view
 					break;																//
 			}																			//
 		}																				//
@@ -143,13 +143,16 @@
 			$view = $this->session->userdata('view');									// View
 			$data['menulist'] = $this->show->getshowmenu($idshow, $idepisode, $view);	// Get the content navigation menu items
 			$data['selected'] = $this->session->userdata('view');						// The selected menu item is same as view
-			$this->load->view('contentnav.php', $data);									// Load the content navigation menu
+			$this->load->view('common/contentnav.php', $data);							// Load the content navigation menu
 		}																				//
 		// End function viewcontentnav() -----------------------------------------------//
+
+		// Destructor ------------------------------------------------------------------//
 		function __destruct()															//
 		{																				//
-			$this->db->close;													// Loads the XBMC Database
+			$this->db->close;															// Closes the database connection
 		}																				//
+		// End of __destruct() ---------------------------------------------------------//
 	}
 /* End of file shows.php */
 /* Location: ./application/controllers/shows.php */

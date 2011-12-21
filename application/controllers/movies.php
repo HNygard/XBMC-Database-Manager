@@ -20,11 +20,11 @@
 		{																				//
 			$this->load->helper(array('form', 'url'));									// Load the url helper
 			$data['title'] = 'Movies';													// Set page title
-			$this->load->view('header', $data);											// Load page header
+			$this->load->view('common/header', $data);									// Load page header
 			$this->load->view('movies/navigation');										// Load page navigation
 			$this->load->view('movies/sidebar');										// Load page navigation
-			$this->load->view('content');												// Load page content, send $data along
-			$this->load->view('footer');												// Load page footer
+			$this->load->view('common/content');										// Load page content, send $data along
+			$this->load->view('common/footer');											// Load page footer
 		}																				//
 		// End function index() --------------------------------------------------------//
 
@@ -55,7 +55,7 @@
 			{																			//
 				$data['list'] = $this->movie->getmovielinks();							// Puts all movie titles in an array (as a href) 
 			}																			//
-			$this->load->view('list', $data);											// Load the list view with movie titles
+			$this->load->view('common/list', $data);									// Load the list view with movie titles
 		}																				//
 		// End function getlist() ------------------------------------------------------//
 		
@@ -77,7 +77,7 @@
 			{																			//
 				case 'info':															// If view is info
 					$movieinfo = $this->movie->getmovieinfo($this->input->get('id'));	// Get info about movie
-					$this->load->view('info.php', $movieinfo);							// Load the info view
+					$this->load->view('common/info.php', $movieinfo);					// Load the info view
 					break;																//
 				case 'edit':															// If view is edit
 					if($this->session->userdata('logged_in'))							// And a user is logged in
@@ -88,12 +88,12 @@
 					else																// If there isn't a user logged in
 					{																	//
 						$movieinfo = $this->movie->getmovieinfo($this->input->get('id'));// Get info about movie
-						$this->load->view('info.php', $movieinfo);						// Load the info view
+						$this->load->view('common/info.php', $movieinfo);				// Load the info view
 					}																	//
 					break;																//
 				default:																// If a view isn't matched
 					$movieinfo = $this->movie->getmovieinfo($this->input->get('id'));	// Get info about movie
-					$this->load->view('info.php', $movieinfo);							// Load the info view
+					$this->load->view('common/info.php', $movieinfo);					// Load the info view
 					break;																//
 			}																			//
 		}																				//
@@ -119,14 +119,16 @@
 			$view = $this->session->userdata('view');									//
 			$data['menulist'] = $this->movie->getmoviemenu($id, $view);					//
 			$data['selected'] = $this->session->userdata('view');						//
-			$this->load->view('contentnav.php', $data);									//
+			$this->load->view('common/contentnav.php', $data);							//
 		}																				//
 		// End function viewcontentnav() -----------------------------------------------//
-	
+
+		// Destructor ------------------------------------------------------------------//
 		function __destruct()															//
 		{																				//
-			$this->db->close;													// Loads the XBMC Database
+			$this->db->close;															// Close the db connection
 		}																				//
+		// End of __destruct() ---------------------------------------------------------//
 	}
 /* End of file movies.php */
 /* Location: ./application/controllers/movies.php */

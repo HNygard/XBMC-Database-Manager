@@ -22,7 +22,7 @@
 							$session_user = $this->session->userdata('logged_in');
 							echo "Logged in as: $session_user ";
 							echo "<a href=\"" . base_url() . "/main/logout\"><button>Logout</button></a>";
-							echo "<a href=\"" . base_url() . "/main/settings\"><button>Settings</button></a>";
+							echo "<a href=\"" . base_url() . "settings\"><button>Settings</button></a>";
 						}
 						else
 						{ ?>

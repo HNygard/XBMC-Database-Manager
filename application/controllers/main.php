@@ -8,9 +8,9 @@
 		{
 			$this->load->helper(array('form', 'url'));				// Load the url helper
 			$data['title'] = 'Main';								// Set page title
-			$this->load->view('header', $data);						// Load page header
+			$this->load->view('common/header', $data);						// Load page header
 			$this->load->view('main/content');						// Load content
-			$this->load->view('footer');							// Load page footer
+			$this->load->view('common/footer');							// Load page footer
 		}
 		
 		public function logout()

@@ -13,9 +13,30 @@ a {
 	margin: 10px;
 }
 
-/*********************************
- * Wrapper contains all elements *
- *********************************/
+/*********************
+ * The settings page *
+ *********************/
+#settings {
+	margin:0 auto;
+	width:760px;
+	height:800px;
+	background-color:#fff;
+	border-top:1px solid #ccc;
+	border-left:1px solid #ccc;
+	border-right:1px solid #999;
+	border-bottom:1px solid #999;
+}
+#settings #header #user a{
+	margin: 0px;
+	padding: 2px;
+}
+#settings #nav{
+	width: 760px;
+}
+
+/*************************************
+ * Wrapper contains all the elements *
+ *************************************/
 #wrapper {
 	margin:0 auto;
 	width:1200px;
