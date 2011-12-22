@@ -28,6 +28,19 @@ a {
 	border-right:1px solid #999;
 	border-bottom:1px solid #999;
 }
+/***********************
+ * Settings edit table *
+ ***********************/
+.edittable th{
+	width: 200px;
+}
+.edittable input{
+	width: 425px;
+}
+.edittable option{
+	width: 400px;
+}
+
 /*************************************
  * Wrapper contains all the elements *
  *************************************/
@@ -64,9 +77,7 @@ a {
 #user a{
 	text-decoration: none;
 }
-.edittable th{
-	width: 150px;
-}
+
 /*********************
  * Main page content *
  *********************/

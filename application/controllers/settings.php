@@ -56,7 +56,7 @@
 		// Edit database values --------------------------------------------------------//
 		public function edit()															//
 		{																				//
-			echo $this->input->post('Hostname');
+			$this->cfg->updatedbcfg();
 		}																				//
 		// End function edit() ---------------------------------------------------------//
 		

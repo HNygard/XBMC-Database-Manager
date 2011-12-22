@@ -19,7 +19,7 @@
 			$info['col2'] = array();
 			if($this->session->userdata('logged_in'))
 			{
-				$col1 = array('Title','Hostname','Username','Password','Database','Database driver','Database prefix');
+				$col1 = array('dbcfg','Hostname','Username','Password','Database','Database driver','Database prefix');
 				foreach ($col1 as $row)
 				{
 					array_push($info['col1'], $row);
@@ -32,6 +32,12 @@
 				}
 			}
 			return $info;
+		}
+		
+		public function updatedbcfg()
+		{
+			$post = $this->input->post();
+			$this->configdb->setdbcfg($post);
 		}
 	}
 /* End of file cfg.php */  

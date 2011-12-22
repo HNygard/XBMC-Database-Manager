@@ -30,6 +30,18 @@
 			return $result;
 		}
 		
+		public function setdbcfg($data)
+		{
+			$sth = $this->connection->prepare('UPDATE dbconnection SET hostname=?, username=?, password=?, database=?, dbdriver=?, dbprefix=?');
+			$host = $data['hostname'];
+			$user = $data['username'];
+			$pass = $data['password'];
+			$db = $data['database'];
+			$driver = $data['dbdriver'];
+			$prefix = $data['dbprefix'];
+			$sth->execute(array($host,$user,$pass,$db,$driver,$prefix)) or die(print_r($sth->errorInfo(), true));
+		}
+		
 		public function __destruct()
 		{
 			$this->connection = NULL;

@@ -167,3 +167,40 @@ function viewsettings(object)
 	$('#content').load('settings/getsettings?what=' + what);
 	return false;
 }
+// Function
+function editcfg(object)
+{
+	var type = object.id;
+	switch (type)
+	{
+		case 'dbcfg':
+			var data = {};
+			$('.'+type).each(function(index)
+			{
+				data['hostname'] = ($(this).attr('name') == 'Hostname') ? $(this).attr('value') : data['hostname'];
+				data['username'] = ($(this).attr('name') == 'Username') ? $(this).attr('value') : data['username'];
+				data['password'] = ($(this).attr('name') == 'Password') ? $(this).attr('value') : data['password'];
+				data['database'] = ($(this).attr('name') == 'Database') ? $(this).attr('value') : data['database'];
+				data['dbdriver'] = ($(this).attr('name') == 'Database driver') ? $(this + 'option:selected').attr('value') : data['dbdriver'];
+				data['dbprefix'] = ($(this).attr('name') == 'Database prefix') ? $(this).attr('value') : data['dbprefix'];
+			});
+			$.ajax(
+			{
+				type: 'POST',
+				url:  '/settings/edit',
+				async: false,
+				data: data,
+				success: function(data)
+				{
+					alert("SAVED!" + data);
+					$('#content').load('settings/getsettings?what=database');
+				},
+				error: function(data)
+				{
+					alert("Error: " + data);
+				}
+			});
+			break;
+	}
+	//return false;
+}

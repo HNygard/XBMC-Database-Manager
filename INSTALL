@@ -2,7 +2,7 @@ Since the current codebase is primarily for testing purposes it isn't made to fi
 
 To get this up and running without config tweaking do as follows:
 
-1: Install packages: apache2, php5, php5-sqlite, php5-mysql, sqlite3
+1: Install packages: apache2, apache2-mod-php5, php5, php5-sqlite, php5-mysql, sqlite3
 
 2: Put all files in a folder outside of your www-root
 
@@ -22,4 +22,6 @@ To get this up and running without config tweaking do as follows:
 4: Edit the data/xbmcdm.db sqlite database, set the correct settings in dbconnection table
 	Will be fixed in the future so it can be set via settings page.
 	
-5: Restart apache
+5: a2enmod php5 and rewrite
+
+6: Restart apache
