@@ -16,24 +16,18 @@ a {
 /*********************
  * The settings page *
  *********************/
-#settings {
-	margin:0 auto;
-	width:760px;
-	height:800px;
-	background-color:#fff;
+#settingslist {
+	width:315px;
+	height:662px;
+	float:left;
+	padding:10px;
+	overflow: auto;
+	white-space: nowrap;
 	border-top:1px solid #ccc;
 	border-left:1px solid #ccc;
 	border-right:1px solid #999;
 	border-bottom:1px solid #999;
 }
-#settings #header #user a{
-	margin: 0px;
-	padding: 2px;
-}
-#settings #nav{
-	width: 760px;
-}
-
 /*************************************
  * Wrapper contains all the elements *
  *************************************/
@@ -70,7 +64,9 @@ a {
 #user a{
 	text-decoration: none;
 }
-
+.edittable th{
+	width: 150px;
+}
 /*********************
  * Main page content *
  *********************/
@@ -102,12 +98,12 @@ a {
  ***********************************************************************/
 #nav {
 	float: left;
-	width:300px;
+	width:335px;
 	background: url('/img/tab-background.png' )repeat-x 100% bottom;
 }
 #contentnav {
 	float: left;
-	width:900px;
+	width:865px;
 	height:38px;
 	background: url('/img/tab-background.png' )repeat-x 100% bottom;
 }
@@ -173,7 +169,7 @@ a {
  * Sidebar (lists) *
  *******************/
 #sidebar {
-	width:300px;
+	width:335px;
 	#height:680px;
 	float:left;
 }
@@ -193,7 +189,7 @@ a {
  * Movie list *
  **************/
 #listing {
-	width:280px;
+	width:315px;
 	height:596px;
 	float:left;
 	padding:10px;
@@ -244,7 +240,7 @@ a {
  * Show list *
  *************/
 #showlist {
-	width:280px;
+	width:315px;
 	height:272px;
 	float:left;
 	padding:10px;
@@ -271,7 +267,7 @@ a {
  * Episode list *
  ****************/
 #episodelist {
-	width:280px;
+	width:315px;
 	height:300px;
 	float:left;
 	padding:10px;
@@ -287,7 +283,7 @@ a {
  * Page content (movie info etc) *
  *********************************/
 #content {
-	width:876px;
+	width:841px;
 	height:662px;
 	float:right;
 	padding:10px;

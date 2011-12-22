@@ -9,6 +9,7 @@
 		{																				//
 			parent::__construct();														// Calls the parent class constructor
 			$this->load->library('ConfigDB');											// Load the database config class
+			$this->load->helper('form');
 			$this->load->model('cfg');													// Init the model
 		}																				//
 		// End __construct() -----------------------------------------------------------//
@@ -17,35 +18,45 @@
 		public function index()															//
 		{																				//
 			$data['title'] = 'Settings';												// Set page title
-			$this->load->view('settings/header', $data);								// Load page header
-			$this->load->view('settings/sidebar');										// List it
+			$this->load->view('common/header', $data);									// Load page header
+			$this->load->view('settings/navigation', $data);							// Load navigation bar
+			$this->load->view('settings/sidebar');										// Load sidebar
+			$this->load->view('common/content');										// Load content
+			$this->load->view('common/footer');											// Load footer
 		}																				//
 		// End function index() --------------------------------------------------------//
 
-		public function getlist()
-		{
+		// -----------------------------------------------------------------------------//
+		public function getlist()														//
+		{																				//
 			$data['list'] = $this->cfg->getsettingslist();								// Get the HTML formatted list of settings (left)
 			$this->load->view('common/list', $data);									// List it
-		}
-				
-		public function database()
+		}																				//
+		// -----------------------------------------------------------------------------//
+
+		// -----------------------------------------------------------------------------//
+		public function getsettings()													//
 		{
-			$data['title'] = 'Database - Settings';										// Set page title
-			$data['list'] = $this->cfg->getsettingslist();								// Get the HTML formatted list of settings (left)
-			$this->load->view('settings/header', $data);								// Load page header
-			$this->load->view('common/list', $data);									// List it
-		}
+			$data = array();
+			$what = $this->input->get('what');
+			switch ($what)
+			{			
+				case 'database':
+					$data = $this->cfg->getdbsettings();
+					$attributes = array('id' => 'database');
+					break;
+				case 'users':
+					something;
+					break;
+			}
+			$this->load->view('settings/edit', $data);
+		}																				//
+		// -----------------------------------------------------------------------------//
 
 		// Edit database values --------------------------------------------------------//
 		public function edit()															//
 		{																				//
-			$editwhat = $this->input->post('what');										// What to edit
-			$movieid = $this->input->post('id');										// Which Movie ID the value belongs to
-			$towhat = $this->input->post('to');											// The new value
-			if($this->session->userdata('logged_in'))									// Check to see that a user is logged in
-			{																			//
-				$this->movie->editmovie($movieid, $editwhat, $towhat);					// If user is logged in, call the edit function
-			}																			//
+			echo $this->input->post('Hostname');
 		}																				//
 		// End function edit() ---------------------------------------------------------//
 		

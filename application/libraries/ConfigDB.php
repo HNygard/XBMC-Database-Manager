@@ -24,26 +24,10 @@
 		public function xbmcdb()
 		{
 			$result = array();
-			$st = 'SELECT hostname,username,password,database,dbdriver,dbprefix FROM dbconnection';
-			$query = $this->connection->query($st);
-			foreach ($query as $row)
-			{
-				$result = $row;
-			}
+			$sth = $this->connection->prepare('SELECT hostname,username,password,database,dbdriver,dbprefix FROM dbconnection');
+			$sth->execute();
+			$result = $sth->fetch(PDO::FETCH_ASSOC);
 			return $result;
-			
-/*$config['hostname'] = "localhost";
-$config['username'] = "myusername";
-$config['password'] = "mypassword";
-$config['database'] = "mydatabase";
-$config['dbdriver'] = "mysql";
-$config['dbprefix'] = "";
-$config['pconnect'] = FALSE;
-$config['db_debug'] = TRUE;
-$config['cache_on'] = FALSE;
-$config['cachedir'] = "";
-$config['char_set'] = "utf8";
-$config['dbcollat'] = "utf8_general_ci";*/
 		}
 		
 		public function __destruct()

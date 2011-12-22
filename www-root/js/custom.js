@@ -157,3 +157,13 @@ function sortepisodes()
 	//var filter = $('select.filter option:selected').val();
 	$('#episodelist').load('shows/getepisodes?idshow=' + idshow + '&season='+season+'&filter='+filter);
 }
+
+/*************************
+ * For the settings view *
+ *************************/
+function viewsettings(object)
+{
+	what = object.id;
+	$('#content').load('settings/getsettings?what=' + what);
+	return false;
+}

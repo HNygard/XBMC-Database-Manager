@@ -4,6 +4,12 @@
 						<li><a href="movies">Movies</a></li>
 						<li id="current"><a href="shows">TV-Shows</a></li>
 						<li><a href="music">Music</a></li>
+						<?php
+						if($this->session->userdata('logged_in'))
+						{
+							echo '<li><a href="settings">Settings</a></li>';
+						}
+						?>
 					</ul>
 				</div>
 			</div>
