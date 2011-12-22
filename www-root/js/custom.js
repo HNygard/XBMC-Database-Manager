@@ -61,6 +61,19 @@ function editmovie(object)
 				return false;
 			}
 			break;
+		case 'Delete':
+			var action = confirm("Are you sure you want to delete this item?");
+			if (action==true)
+			{
+				$.post('/movies/delete',{ id: object.id });
+				location.reload();
+			}
+			else
+			{
+				location.reload();
+			}
+			return false;
+			break;
 		default:
 			return false;
 			break;
@@ -167,7 +180,7 @@ function viewsettings(object)
 	$('#content').load('settings/getsettings?what=' + what);
 	return false;
 }
-// Function
+// Function to save edited settings
 function editcfg(object)
 {
 	var type = object.id;
@@ -202,5 +215,4 @@ function editcfg(object)
 			});
 			break;
 	}
-	//return false;
 }

@@ -5,6 +5,15 @@
 		{
 			parent::__construct();
 		}
+		
+		public function deletemovie($id)
+		{
+			if($this->session->userdata('logged_in'))
+			{
+				$st = 'DELETE m.*,f.*,p.* FROM movie AS m LEFT JOIN files as f ON f.idFile = m.idFile LEFT JOIN path as p ON p.idPath = f.idPath WHERE m.idMovie = ';
+				return $this->db->query($st . $id);
+			}
+		}
 
 		public function editmovie($id, $what, $tovalue)
 		{
@@ -125,6 +134,9 @@
 			{
 				array_push($edit['col2'], $row);
 			}
+			array_push($edit['col1'], 'Delete');
+			array_push($edit['col2'], 'Removes the movie from the database');
+			array_push($edit['col3'], '<button id="'.$id.'" name="Delete" onclick="return editmovie(this);">Delete</button>');
 			return $edit;
 		}			
 

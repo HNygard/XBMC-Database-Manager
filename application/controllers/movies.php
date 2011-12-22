@@ -28,6 +28,17 @@
 		}																				//
 		// End function index() --------------------------------------------------------//
 
+		// Deletes a movie from the database -------------------------------------------//
+		public function delete()														//
+		{																				//
+			$movieid = $this->input->post('id');										// Which Movie ID to delete
+			if($this->session->userdata('logged_in'))									// Check to see that a user is logged in
+			{																			//
+				$this->movie->deletemovie($movieid);									// If user is logged in, call the edit function
+			}																			//
+		}																				//
+		// End function delete() -------------------------------------------------------//
+
 		// Edit database values --------------------------------------------------------//
 		public function edit()															//
 		{																				//
