@@ -29,6 +29,15 @@
 			$result = $sth->fetch(PDO::FETCH_ASSOC);
 			return $result;
 		}
+
+		public function users()
+		{
+			$result = array();
+			$sth = $this->connection->prepare('SELECT username FROM members');
+			$sth->execute();
+			$result = $sth->fetch(PDO::FETCH_ASSOC);
+			return $result;
+		}
 		
 		public function setdbcfg($data)
 		{

@@ -62,7 +62,7 @@
 						//$attributes = array('id' => 'database');						// 
 						break;															//
 					case 'users':														// If the user settings page is requested
-						something;														// do something
+						$data = $this->cfg->getusersettings();							// do something
 						break;															//
 				}																		//
 				$this->load->view('settings/edit', $data);								// Show the edit view

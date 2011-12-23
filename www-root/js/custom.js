@@ -214,5 +214,8 @@ function editcfg(object)
 				}
 			});
 			break;
+		case 'usercfg':
+			alert('Type: ' +type);
+			break;
 	}
 }
