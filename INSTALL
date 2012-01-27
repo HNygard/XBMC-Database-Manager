@@ -4,13 +4,15 @@ To get this up and running without config tweaking do as follows:
 
 1: Install packages: apache2, apache2-mod-php5, php5, php5-sqlite, php5-mysql, sqlite3
 
-2: Put all files in a folder outside of your www-root
+2: Extract files in a folder of your choosing
 
 3: Create a vhost with the following content:
-	<VirtualHost <hostname/ip/*>:80>
+	<VirtualHost <hostname/ip/*>:port>
 	    ServerName <server name here>
 	    ServerAlias <alias here>
 	    DocumentRoot /path/to/the/folder/www-root
+
+	    Alias /thumbs /path/to/folder/containing/thumbnails
 
 	    <Directory /path/to/the/folder/www-root>
 	        Options Indexes FollowSymLinks
@@ -22,6 +24,6 @@ To get this up and running without config tweaking do as follows:
 4: Edit the data/xbmcdm.db sqlite database, set the correct settings in dbconnection table
 	Will be fixed in the future so it can be set via settings page.
 	
-5: a2enmod php5 and rewrite
+5: 'a2enmod php5' and 'a2enmod rewrite'
 
 6: Restart apache
