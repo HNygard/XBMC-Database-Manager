@@ -7,13 +7,13 @@ function viewmovie(id, view)														//
 	if (view)																		//
 	{																				//
 		$('#contentnav').load("movies/viewcontentnav?id=" + id + "&view=" + view);	//
-		$('#content').load("movies/viewmovie?id=" + id + "&view=" + view);			//
+		$('#contentinfo').load("movies/viewmovie?id=" + id + "&view=" + view);			//
 		return false;																//
 	}																				//
 	else																			//
 	{																				//
 		$('#contentnav').load("movies/viewcontentnav?id=" + id);					//
-		$('#content').load("movies/viewmovie?id=" + id);							//
+		$('#contentinfo').load("movies/viewmovie?id=" + id);							//
 	}																				//
 	return false;																	//
 }																					//
@@ -91,7 +91,7 @@ function editmovie(object)
 		success: function(data)
 		{
 			$('#contentnav').load("movies/viewcontentnav?id=" + object.id);
-			$('#content').load("movies/viewmovie?id=" + object.id);
+			$('#contentinfo').load("movies/viewmovie?id=" + object.id);
 		},
 		error: function(data)
 		{
@@ -125,13 +125,13 @@ function viewtv(object, view)
 		{
 			case 'showlink':
 				$('#contentnav').load("shows/viewcontentnav?idshow="+idshow+"&idepisode="+idepisode+"&view="+view);
-				$('#content').load('shows/view?idshow='+idshow+"&idepisode="+idepisode+"&view="+view);
+				$('#contentinfo').load('shows/view?idshow='+idshow+"&idepisode="+idepisode+"&view="+view);
 				$('#episodelistmenu').load('shows/getepisodesmenu?idshow='+idshow);
 				$('#episodelist').load('shows/getepisodes?idshow='+idshow);
 				break;
 			case 'episodelink':
 				$('#contentnav').load("shows/viewcontentnav?idshow=" + idshow + "&idepisode=" + idepisode+"&view="+view);
-				$('#content').load('shows/view?idshow=' + idshow + "&idepisode=" + idepisode + "&view=" + view);
+				$('#contentinfo').load('shows/view?idshow=' + idshow + "&idepisode=" + idepisode + "&view=" + view);
 				break;
 		}
 	}
@@ -141,14 +141,14 @@ function viewtv(object, view)
 		{
 			case 'showlink':
 				$('#contentnav').load("shows/viewcontentnav?idshow="+idshow+"&idepisode="+idepisode);
-				$('#content').load('shows/view?idshow='+idshow+"&idepisode="+idepisode);
+				$('#contentinfo').load('shows/view?idshow='+idshow+"&idepisode="+idepisode);
 				$('#episodelistmenu').load('shows/getepisodesmenu?idshow='+idshow);
 				$('#episodelist').load('shows/getepisodes?idshow='+idshow);
 				break;
 			case 'episodelink':
 				$('#contentnav').load("shows/viewcontentnav?idshow=" + idshow + "&idepisode=" + idepisode);
 				alert("Show ID: " + idshow + " Episode ID: " + idepisode + " View: NO! What: " + what);
-				$('#content').load('shows/view?idshow=' + idshow + "&idepisode=" + idepisode);
+				$('#contentinfo').load('shows/view?idshow=' + idshow + "&idepisode=" + idepisode);
 				break;
 		}
 	}

@@ -7,9 +7,15 @@
 		<meta name="author" content="Vicious" />
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href='<?php echo base_url();?>css/style.css' type="text/css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>shadowbox/shadowbox.css">
 		<title><?php if (isset($title)){echo $title . " - ";} ?>XBMC Database Manager</title>
-		<script type="text/javascript" src="<?php echo base_url();?>js/jquery-1.7.js"></script>
+<!--		<script type="text/javascript" src="<?php echo base_url();?>js/jquery-1.7.js"></script>-->
+		<script type="text/javascript" src="<?php echo base_url();?>js/jquery.1.7.min.js"></script>
 		<script type="text/javascript" src="<?php echo base_url();?>js/custom.js"></script>
+		<script type="text/javascript" src="<?php echo base_url();?>shadowbox/shadowbox.js"></script>
+		<script type="text/javascript">
+			Shadowbox.init();
+		</script>
 	</head>
 	<body>
 		<div id="wrapper">

@@ -90,6 +90,14 @@
 					$movieinfo = $this->movie->getmovieinfo($this->input->get('id'));	// Get info about movie
 					$this->load->view('common/info.php', $movieinfo);					// Load the info view
 					break;																//
+				case 'cast':															// If view is info
+					$actors = $this->movie->getmoviecast($this->input->get('id'));
+					$this->load->view('common/cast.php', $actors);					// Load the info view
+					break;																//
+				case 'fanart':															// If view is info
+					$info['hash'] = $this->movie->getmoviehash($this->input->get('id'));
+					$this->load->view('common/fanart.php', $info);					// Load the info view
+					break;																//
 				case 'edit':															// If view is edit
 					if($this->session->userdata('logged_in'))							// And a user is logged in
 					{																	//
@@ -104,6 +112,8 @@
 					break;																//
 				default:																// If a view isn't matched
 					$movieinfo = $this->movie->getmovieinfo($this->input->get('id'));	// Get info about movie
+					$hash = $this->configdb->hashit($movieinfo['col2']['strPath'].$movieinfo['col2']['strFile']);
+					$movieinfo['thumb'] = $hash;
 					$this->load->view('common/info.php', $movieinfo);					// Load the info view
 					break;																//
 			}																			//

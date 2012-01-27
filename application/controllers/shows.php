@@ -102,6 +102,10 @@
 					$info = $this->show->getshowinfo($idshow);							// Get the showinfo
 					$this->load->view('common/info.php', $info);						// Load the info view
 					break;																//
+				case 'cast':	
+					$info = $this->show->getshowcast($idshow);							// Get the showinfo
+					$this->load->view('common/cast.php', $info);						// Load the info view
+					break;																//
 				case 'edit':															// If view is edit
 					if($this->session->userdata('logged_in'))							// Check to see that a user is logged in
 					{																	//

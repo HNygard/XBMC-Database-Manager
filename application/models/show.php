@@ -40,25 +40,37 @@
 			switch ($view)																//
 			{																			//
 				case 'info':															//
-					array_push($menu,'<li id="current"><a href="" id="'.$idshow.'" onclick="return viewtv(this, \'info\');" name="'.$idepisode.'" class="showlink">Info</a></li>');													//
+					array_push($menu,'<a class="current" href="" id="'.$idshow.'" onclick="return viewtv(this, \'info\');" name="'.$idepisode.'" class="showlink">Info</a>');													//
+					array_push($menu,'<a href="" id="'.$idshow.'" onclick="return viewtv(this, \'cast\');" name="'.$idepisode.'" class="showlink">Cast</a>');
 					if($this->session->userdata('logged_in'))							//
 					{																	//
-						array_push($menu,'<li><a href="" id="'.$idshow.'" onclick="return viewtv(this, \'edit\');" name="'.$idepisode.'" class="showlink">Edit</a></li>');												//
+						array_push($menu,'<a href="" id="'.$idshow.'" onclick="return viewtv(this, \'edit\');" name="'.$idepisode.'" class="showlink">Edit</a>');												//
 					}																	//
-					array_push($menu,'<li><a href="" id="'.$idshow.'" onclick="return viewtv(this, \'epinfo\');" name="'.$idepisode.'" class="episodelink">Episode Info</a></li>');													//
+					array_push($menu,'<a href="" id="'.$idshow.'" onclick="return viewtv(this, \'epinfo\');" name="'.$idepisode.'" class="episodelink">Episode Info</a>');													//
+					break;																//
+				case 'cast':															//
+					array_push($menu,'<a href="" id="'.$idshow.'" onclick="return viewtv(this, \'info\');" name="'.$idepisode.'" class="showlink">Info</a>');
+					array_push($menu,'<a class="current" href="" id="'.$idshow.'" onclick="return viewtv(this, \'cast\');" name="'.$idepisode.'" class="showlink">Cast</a>');
+					if($this->session->userdata('logged_in'))							//
+					{																	//
+						array_push($menu,'<a href="" id="'.$idshow.'" onclick="return viewtv(this, \'edit\');" name="'.$idepisode.'" class="showlink">Edit</a>');												//
+					}																	//
+					array_push($menu,'<a href="" id="'.$idshow.'" onclick="return viewtv(this, \'epinfo\');" name="'.$idepisode.'" class="episodelink">Episode Info</a>');
 					break;																//
 				case 'edit':															//
-					array_push($menu,'<li><a href="" id="'.$idshow.'" onclick="return viewtv(this, \'info\');" name="'.$idepisode.'" class="showlink">Info</a></li>');
-					array_push($menu,'<li id="current"><a href="" id="'.$idshow.'" onclick="return viewtv(this, \'edit\');" name="'.$idepisode.'" class="showlink">Edit</a></li>');
-					array_push($menu,'<li><a href="" id="'.$idshow.'" onclick="return viewtv(this, \'epinfo\');" name="'.$idepisode.'" class="episodelink">Episode Info</a></li>');
+					array_push($menu,'<a href="" id="'.$idshow.'" onclick="return viewtv(this, \'info\');" name="'.$idepisode.'" class="showlink">Info</a>');
+					array_push($menu,'<a href="" id="'.$idshow.'" onclick="return viewtv(this, \'cast\');" name="'.$idepisode.'" class="showlink">Cast</a>');
+					array_push($menu,'<a class="current" href="" id="'.$idshow.'" onclick="return viewtv(this, \'edit\');" name="'.$idepisode.'" class="showlink">Edit</a>');
+					array_push($menu,'<a href="" id="'.$idshow.'" onclick="return viewtv(this, \'epinfo\');" name="'.$idepisode.'" class="episodelink">Episode Info</a>');
 					break;																//
 				case 'epinfo':															//
-					array_push($menu,'<li><a href="" id="'.$idshow.'" onclick="return viewtv(this, \'info\');" name="'.$idepisode.'" class="showlink">Info</a></li>');
+					array_push($menu,'<a href="" id="'.$idshow.'" onclick="return viewtv(this, \'info\');" name="'.$idepisode.'" class="showlink">Info</a>');
+					array_push($menu,'<a href="" id="'.$idshow.'" onclick="return viewtv(this, \'cast\');" name="'.$idepisode.'" class="showlink">Cast</a>');
 					if($this->session->userdata('logged_in'))							//
 					{																	//
-						array_push($menu,'<li><a href="" id="'.$idshow.'" onclick="return viewtv(this, \'edit\');" name="'.$idepisode.'" class="showlink">Edit</a></li>');
+						array_push($menu,'<a href="" id="'.$idshow.'" onclick="return viewtv(this, \'edit\');" name="'.$idepisode.'" class="showlink">Edit</a>');
 					}																	//
-					array_push($menu,'<li id="current"><a href="" id="'.$idshow.'" onclick="return viewtv(this, \'epinfo\');" name="'.$idepisode.'" class="episodelink">Episode Info</a></li>');
+					array_push($menu,'<a class="current" href="" id="'.$idshow.'" onclick="return viewtv(this, \'epinfo\');" name="'.$idepisode.'" class="episodelink">Episode Info</a>');
 					break;																//
 			}																			//
 			return $menu;																//
@@ -70,17 +82,10 @@
 		{																				//
 			$info['col1'] = array();													// Info col1 and col2 is empty arrays
 			$info['col2'] = array();													//
+			$info['thumb'] = '';
 																						//
-			if($this->session->userdata('logged_in'))									// Checks if user is logged in
-			{																			// Sets the select clause and the corresponding names
-				$select = 's.c00,COUNT(e.idEpisode),s.c05,s.c08,s.c04,s.c14,p.strPath,s.c01';
-				$col1 = array('Title','Episodes','First Aired','Genre','Rating','Network','Path','Plot');
-			}																			//
-			else																		// If user isn't logged in
-			{																			// Select the following columns from DB
-				$select = 's.c00,COUNT(e.idEpisode),s.c05,s.c08,s.c04,s.c14,s.c01';		//
-				$col1 = array('Title','Episodes','First Aired','Genre','Rating','Network','Plot');
-			}																			//
+			$select = 's.c00,COUNT(e.idEpisode),s.c05,s.c08,s.c04,s.c14,p.strPath,s.c01';
+			$col1 = array('Title:','Episodes:','First Aired:','Genre:','Rating:','Network:','Path:<br/>','Plot:</br>');
 																						//
 			$this->db->select($select);													// Prepare SELECT clause
 			$this->db->from('tvshow AS s');												// Select from tvshow table as s
@@ -98,32 +103,57 @@
 			{																			//
 				array_push($info['col2'], $row);										// Put the values in info, col2, standard indexed 0-n
 			}																			//
+			$info['thumb'] = $this->configdb->hashit($info['col2'][6]);
 			$info['col2']['4'] = number_format($info['col2']['4'], 1);					// Set rating to 1 decimal
 			return $info;																// Return the info array
 		}																				//
 		// End function getshowinfo($id) -----------------------------------------------//
+
+		// Creates the HTML TV-show casts ----------------------------------------------//
+		public function getshowcast($id = '1')											// TV-Show ID is 1 if nothing is given
+		{																				//
+			$cast['actor'] = array();
+			$cast['role'] = array();
+			$cast['thumb'] = array();
+			// Defines what to extract from database
+			$select = 'idActor,strRole';
+			$this->db->where('idShow', $id);							// Prepare WHERE clause
+			$query = $this->db->get('actorlinktvshow');
+			foreach ($query->result() as $row)
+			{
+				array_push($cast['role'], $row->strRole);
+				$select = 'strActor';
+				$this->db->where('idActor', $row->idActor);						// Prepare WHERE clause
+				$query2 = $this->db->get('actors');
+				foreach ($query2->result() as $row2)
+				{
+					array_push($cast['actor'], $row2->strActor);
+				}
+			}
+			foreach ($cast['actor'] as $actor)
+			{
+				array_push($cast['thumb'], $this->configdb->hashit('actor'.$actor));
+			}
+			return $cast;
+		}																				//
+		// End function getshowcast($id) -----------------------------------------------//
 
 		// Creates the HTML episode info -----------------------------------------------//
 		public function getepisodeinfo($id = '0')										//
 		{																				//
 			$info['col1'] = array();													//
 			$info['col2'] = array();													//
+			$info['thumb'] = '';													//
 																						//
-			if($this->session->userdata('logged_in'))									//
-			{																			//
-				$select = 'CONCAT(strTitle,\' - \',c00),CONCAT(\'S\',c12,\' E\',c13),c05,strStudio,c03,c09,strPath,strFileName,c01,playCount,lastPlayed';
-				$col1 = array('Title','Season/Episode','First Aired','Studio','Rating','Length','Path','Filename','Plot','Playcount','Last played');
-			}																			//
-			else																		//
-			{																			//
-				$select = 'CONCAT(strTitle,\' - \',c00),CONCAT(\'S\',c12,\' E\',c13),c05,strStudio,c03,c06,c01,playCount,lastPlayed';
-				$col1 = array('Title','Season/Episode','First Aired','Studio','Rating','Thumb','Plot','Playcount','Last played');
-			}																			//
+			$select = 'CONCAT(strTitle,\' - \',c00),CONCAT(\'S\',c12,\' E\',c13),c05,strStudio,c03,c09,strPath,strFileName,c01,playCount,lastPlayed';
+			$col1 = array('Title:','Season/Episode:','First Aired:','Studio:','Rating:','Length:','Path:<br/>','Filename:<br/>','Plot:<br/>','Playcount:','Last played:');
+
 			if($id == '0' || $id == '')													// If episode id is 0
 			{																			// Means no episode is chosen yet
 				array_push($info['col2'], 'Select episode');							// Print this text
 				return $info;															// exit function
 			}																			//
+
 			$this->db->select($select, FALSE);											// Prepare SELECT clause
 			$this->db->from('episodeview');												//
 			$this->db->where('idEpisode', $id);											// Prepare WHERE clause
@@ -140,16 +170,21 @@
 			$info['col2']['4'] = number_format($info['col2']['4'], 1);					// Set rating to only 1 decimal
 			$info['col2']['5'] = str_replace('<thumb>','<a target="_blank" href="',$info['col2']['5']);	// Replace <thumb> tag in thumb column with a href to thetvdb
 			$info['col2']['5'] = str_replace('</thumb>','">The TVDB</a>',$info['col2']['5']);
-			if($this->session->userdata('logged_in'))									// Check if user is logged in
-			{																			//
-				$info['col2']['9'] = $info['col2']['9'] ? $info['col2']['9'] : '0';		// Set the playcount to actual playcount or 0 if it is NULL
-				$info['col2']['10'] = $info['col2']['10'] ? $info['col2']['10'] : 'Never';	// Set the last watched to corresponding time or Never if value is NULL
-			}																			//
-			else																		// If user isn't logged in
-			{																			//
-				$info['col2']['7'] = $info['col2']['7'] ? $info['col2']['7'] : '0';		// Set the playcount to actual playcount or 0 if it is NULL
-				$info['col2']['8'] = $info['col2']['8'] ? $info['col2']['8'] : 'Never';	// Set the last watched to corresponding time or Never if value is NULL
-			}																			//			
+			$info['col2']['9'] = $info['col2']['9'] ? $info['col2']['9'] : '0';		// Set the playcount to actual playcount or 0 if it is NULL
+			$info['col2']['10'] = $info['col2']['10'] ? $info['col2']['10'] : 'Never';	// Set the last watched to corresponding time or Never if value is NULL
+			$info['thumb'] = $this->configdb->hashit($info['col2'][6].$info['col2'][7]);
+
+			if(!$this->session->userdata('logged_in'))
+			{
+				unset($info['col1'][6]);
+				unset($info['col2'][6]);
+				unset($info['col1'][7]);
+				unset($info['col2'][7]);
+				//Re-index the arrays
+				$info['col1'] = array_values($info['col1']);
+				$info['col2'] = array_values($info['col2']);
+			}
+
 			return $info;																// Return with the info array
 		}																				//
 		// End function getepisodeinfo($id) --------------------------------------------//

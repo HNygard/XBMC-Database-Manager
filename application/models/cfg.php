@@ -47,12 +47,13 @@
 				$info['col1'] = array();
 				$info['col2'] = array();
 				$info['col1']['0'] = 'usercfg';
-				$info['col2']['0'] = 'Users';
+				$info['col2']['0'] = 'User settings';
 				
-				$query = $this->configdb->users();
+				$query = $this->configdb->user();
+				array_push($info['col1'], 'Username');
+				array_push($info['col1'], 'Password');
 				foreach ($query as $row)
 				{
-					array_push($info['col1'], 'User');
 					array_push($info['col2'], $row);
 				}
 				return $info;

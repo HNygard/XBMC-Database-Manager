@@ -1,0 +1,13 @@
+<VirtualHost 127.0.0.1:80>			<-- Set server IP accordingly
+    ServerAdmin webmaster@localhost
+    ServerName xbmcdm
+    DocumentRoot /var/www/xbmcdm		<-- Set this if you have symlinked like me, else point to www-root folder for app
+
+    Alias /thumbs /path/to/thumbnails/folder	<-- Set to the Thumbnails folder
+
+    <Directory /var/www/xbmcdm/>		<-- Same www-root as above
+	Options Indexes FollowSymLinks
+	AllowOverride All
+	allow from all
+    </Directory>
+</VirtualHost>

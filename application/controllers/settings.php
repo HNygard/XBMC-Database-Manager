@@ -60,12 +60,13 @@
 					case 'database':													// If the database settings page is requested
 						$data = $this->cfg->getdbsettings();							// Set data to return value from dbsettings()
 						//$attributes = array('id' => 'database');						// 
+						$this->load->view('settings/dbedit', $data);						// Show the edit view
 						break;															//
 					case 'users':														// If the user settings page is requested
 						$data = $this->cfg->getusersettings();							// do something
+						$this->load->view('settings/useredit', $data);						// Show the edit view
 						break;															//
 				}																		//
-				$this->load->view('settings/edit', $data);								// Show the edit view
 			}																			//
 			else																		// If user isn't logged in
 			{																			//

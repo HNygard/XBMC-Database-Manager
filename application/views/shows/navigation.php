@@ -1,28 +1,12 @@
-			<div id="nav">
-				<div id="tabs">
-					<ul>
-						<li><a href="movies">Movies</a></li>
-						<li id="current"><a href="shows">TV-Shows</a></li>
-						<li><a href="music">Music</a></li>
-						<?php
-						if($this->session->userdata('logged_in'))
-						{
-							echo '<li><a href="settings">Settings</a></li>';
-						}
-						?>
-					</ul>
-				</div>
+			<div id="navigation">
+				<a href="movies">Movies</a>
+				<a href="shows" id="current">TV-Shows</a>
+				<a href="music">Music</a>
 			</div>
-			<div id="contentnav">
-				<div id="tabs">
-					<ul>
-						<script>
-							//$(document).ready(function()
-							//{
-							//	$('#contentnav').load("shows/getcontentmenu");
-							//});
-						</script>
-					</ul>
-				</div>
-			</div>
-			<div id="sidebar">
+			<script>
+				//$(document).ready(function()
+				//{
+				//	$('#contentnav').load("shows/getcontentmenu");
+				//});
+			</script>
+			<div id="sidebar" class="roundcorners">
