@@ -1,0 +1,14 @@
+--------------------------------------------
+-= XBMC-Database-Manager 0.1 (2012-01-27) =-
+--------------------------------------------
+
+The following has been changed/fixed/added/removed in this release:
+
+	* Images (Web server needs access to thumbnails directory, see vhost example)
+	* Cast info
+	* Link to settings page disabled
+	* Settings page not working correctly
+	* Style changes
+	* Image overlay window when clicking on thumbnails
+	* Application works without internet connection
+	* Forgotten stuff...
