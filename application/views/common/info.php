@@ -5,8 +5,22 @@
 <?php
 if(isset($thumb))
 {
+	$thumb_found = false;
 	$thumburl = base_url().'thumbs/'.substr($thumb,0,1).'/'.$thumb.'.tbn';
 	if ( @file_get_contents($thumburl,0,NULL,0,1) )
+	{
+		$thumb_found = true;
+	}
+	else
+	{
+		$thumburl = base_url().'thumbs/Video/'.substr($thumb,0,1).'/'.$thumb.'.tbn';
+		if ( @file_get_contents($thumburl,0,NULL,0,1) )
+		{
+			$thumb_found = true;
+		}
+	}
+	
+	if ( $thumb_found )
 	{
 		$imginfo = getimagesize($thumburl);
 		if(($imginfo[0]/$imginfo[1])>2)			//Image is twice as wide as it is high
