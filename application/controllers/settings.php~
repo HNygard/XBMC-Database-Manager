@@ -49,20 +49,20 @@
 		// End function getlist() ------------------------------------------------------//
 
 		// Function to get view the html formatted settings content page ---------------//
-		public function getsettings()							//
-		{										//
-			if ($this->session->userdata('logged_in'))				// Check to see if the user is logged in
-			{									//
-				$data = array();						// Data is empty array
-				$what = $this->input->get('what');				// Set what to $_GET variable what
-				$data = $this->cfg->getcfg($what);				// Set data to return value from dbsettings()
-				$this->load->view("settings/$what", $data);			// Show the edit view
-			}									//
-			else									// If user isn't logged in
-			{									//
-				redirect('main', 'refresh');					// Redirect to main page
-			}									//
-		}										//
+		public function getsettings()													//
+		{																				//
+			if ($this->session->userdata('logged_in'))									// Check to see if the user is logged in
+			{																			//
+				$data = array();														// Data is empty array
+				$what = $this->input->get('what');										// Set what to $_GET variable what
+				$data = $this->cfg->getcfg($what);							// Set data to return value from dbsettings()
+				$this->load->view("settings/$what", $data);						// Show the edit view
+			}																			//
+			else																		// If user isn't logged in
+			{																			//
+				redirect('main', 'refresh');											// Redirect to main page
+			}																			//
+		}																				//
 		// End function getsettings() --------------------------------------------------//
 
 		// Edit database values --------------------------------------------------------//

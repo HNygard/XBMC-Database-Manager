@@ -177,7 +177,7 @@ function sortepisodes()
 function viewsettings(object)
 {
 	what = object.id;
-	$('#contentinfo').load('settings/getsettings?what=' + what);
+	$('#content').load('settings/getsettings?what=' + what);
 	return false;
 }
 // Function to save edited settings

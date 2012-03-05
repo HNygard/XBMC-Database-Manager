@@ -85,26 +85,6 @@
 			}
 			return NULL;
 		}
-
-		public function adduser()
-		{
-			if ($this->session->userdata('logged_in'))
-			{
-				$post = $this->input->post();
-				$this->configdb->setdbcfg($post);
-			}
-			return NULL;
-		}
-
-		public function deluser()
-		{
-			if ($this->session->userdata('logged_in'))
-			{
-				$post = $this->input->post();
-				$this->configdb->setdbcfg($post);
-			}
-			return NULL;
-		}
 	}
 /* End of file cfg.php */  
 /* Location: ./application/models/cfg.php */  

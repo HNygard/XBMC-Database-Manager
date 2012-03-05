@@ -9,7 +9,10 @@
 			$this->load->helper(array('form', 'url'));				// Load the url helper
 			$data['title'] = 'Main';								// Set page title
 			$this->load->view('common/header', $data);						// Load page header
-			$this->load->view('main/navigation');										// Load page navigation
+
+			$this->load->view('movies/navigation');										// Load page navigation
+			$this->load->view('movies/sidebar');										// Load page navigation
+
 			$this->load->view('main/content');						// Load content
 			$this->load->view('common/footer');							// Load page footer
 		}
