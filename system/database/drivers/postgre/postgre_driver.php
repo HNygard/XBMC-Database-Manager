@@ -83,7 +83,6 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	function db_connect()
 	{
-		echo '<br>In db_connect, string: ' . $this->_connect_string();
 		return @pg_connect($this->_connect_string());
 	}
 
